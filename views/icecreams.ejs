@@ -7,20 +7,18 @@
   <title>Ice Cream Selector</title>
 </head>
 <body>
-  <h1>Flavor Selector</h1>
+  <h1>Ice Cream Comparison</h1>
 
-  <% let listOfFlavors = [] %>
 
   <% iceCreams.forEach(function(i) { %>
-    <% if (!listOfFlavors.includes(i.flavorName)) { %>
-      <a href="/<%= i._id %>">
-        <div class='flavor-selector'>
-            <img src='<%= i.flavorImage %>'>
-            <p><%= i.flavorName %></p>
+      <a href="<%= i.url %>">
+        <div class='ice-cream'>
+            <img src='<%= i.image %>'>
         </div>
       </a>
-      <% listOfFlavors.push(i.flavorName); %>
-    <% } %>
+      <p><%= i.name %></p>
+      <p>Description: <span> <%= i.description %></span></p>
+      <p>Rating: <span> <%= i.rating %></span></p>
     <% }); %>
 
 </body>

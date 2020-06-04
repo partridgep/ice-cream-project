@@ -6,7 +6,6 @@ module.exports = {
 
 function index(req, res) {
   IceCream.find({}, function(err, iceCreams) {
-    res.render('flavors', { iceCreams });
+    res.render('icecreams', { iceCreams });
   });
 };
-

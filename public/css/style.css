@@ -61,3 +61,14 @@
     color: black;
     background-color: rgb(250,240,240,.7);
 }
+
+.ice-cream {
+    text-align: center;
+    height: 25vh;
+    margin-bottom: 20px;
+}
+
+.ice-cream > img {
+    height: 25vh;
+    object-fit: contain;
+}

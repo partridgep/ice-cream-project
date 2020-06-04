@@ -18,6 +18,8 @@ const iceCreamSchema = new Schema({
 },
     brandImage: String,
     image: String,
+    url: String,
+    description: String
 });
 
 module.exports = mongoose.model('IceCream', iceCreamSchema);
