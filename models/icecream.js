@@ -3,6 +3,10 @@ const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
 
 const iceCreamSchema = new Schema({
+    name: {
+        type: String,
+        unique: true
+    },
     flavorName: {
         type: String,
         required: true,

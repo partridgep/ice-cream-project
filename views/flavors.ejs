@@ -1,0 +1,27 @@
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <link rel='stylesheet' href='/css/style.css' />
+  <title>Ice Cream Selector</title>
+</head>
+<body>
+  <h1>Flavor Selector</h1>
+
+  <% let listOfFlavors = [] %>
+
+  <% iceCreams.forEach(function(i) { %>
+    <% if (!listOfFlavors.includes(i.flavorName)) { %>
+      <a href="/flavors/<%= i._id %>">
+        <div class='flavor-selector'>
+            <img src='<%= i.flavorImage %>'>
+            <p><%= i.flavorName %></p>
+        </div>
+      </a>
+      <% listOfFlavors.push(i.flavorName); %>
+    <% } %>
+    <% }); %>
+
+</body>
+</html>

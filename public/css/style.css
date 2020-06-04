@@ -36,3 +36,28 @@
       background-color: rgb(250,240,240,.7);
   }
 
+  .flavor-selector {
+    position: relative;
+    text-align: center;
+    height: 25vh;
+    margin-bottom: 20px;
+}
+
+.flavor-selector > img {
+    height: 25vh;
+    object-fit: cover;
+    border: 2px solid grey;
+    border-radius: 10px;
+    object-fit: cover;
+}
+
+.flavor-selector > p {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -120%);
+    font-size: 40px;
+    text-transform: uppercase;
+    color: black;
+    background-color: rgb(250,240,240,.7);
+}
