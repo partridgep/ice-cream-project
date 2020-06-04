@@ -1,0 +1,38 @@
+* {
+    box-sizing: border-box;
+    font-family: Helvetica;
+    text-align: center;
+  }
+
+  body {
+    margin: 0;
+    height: 100vh;
+  }
+
+  .main-selector {
+      position: relative;
+      text-align: center;
+      height: 400px;
+      margin-bottom: 20px;
+  }
+
+  .main-selector > img {
+      width: 75vw;
+      height: 400px;
+      object-fit: cover;
+      border: 2px solid grey;
+      border-radius: 10px;
+      object-fit: cover;
+  }
+
+  .main-selector > p {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -100%);
+      font-size: 50px;
+      text-transform: uppercase;
+      color: black;
+      background-color: rgb(250,240,240,.7);
+  }
+

@@ -7,8 +7,8 @@ const indexRouter = require('./routes/index');
 // Set up express app
 const app = express();
 
-// Connect to DB
-
+// connect to the database with Mongoose
+require('./config/database');
 
 // Configure the app with app.set()
 app.set('view engine', 'ejs');

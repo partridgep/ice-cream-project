@@ -8,5 +8,26 @@
 </head>
 <body>
   <h1>Ice Cream Selector</h1>
+
+  <a href="/icecreams/flavors/">
+    <div class='main-selector'>
+        <img src='https://tarateaspoon.com/wp-content/uploads/2017/06/03_Ice_Cream_Group_01_017-1-e1498669461109.jpg'>
+        <p>Select Flavor</p>
+    </div>
+  </a>
+
+  <a href="/icecreams/brands/">
+    <div class='main-selector'>
+        <img src='https://hips.hearstapps.com/hmg-prod.s3.amazonaws.com/images/indextemplate-icecream-1526322227.jpg'>
+        <p>Select Brand</p>
+    </div>
+  </a>
+
+
+  <% iceCreams.forEach(function(i) { %>
+      <p><%= i.flavorName%></p>
+      <p><%= i.brandName %></p>
+    <% }); %>
+
 </body>
 </html>
