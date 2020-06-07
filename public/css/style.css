@@ -9,6 +9,58 @@
     height: 100vh;
   }
 
+  nav {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    height: 50px;
+    margin: 0;
+    background-color: aliceblue;
+  }
+
+  nav a {
+      align-self: center;
+      text-decoration: none;
+      text-transform: capitalize;
+      padding: 16px 10px;
+      color: grey;
+      margin: 0;
+  }
+
+  #user_nav {
+      text-align: right;
+      margin-top: -5px;
+      width: 70%;
+      display: inline;
+  }
+
+  i {
+      font-size: 16px !important;
+      margin: 3px;
+  }
+
+  .user_photo {
+    display: inline;
+    position: absolute;
+    margin-left: -50px;
+    margin-top: -7px;
+    width: 40px;
+    height: 40px;
+    border-radius: 10px;
+    text-align:center;
+}
+
+#user-ice-creams {
+    padding-left: 60px;
+}
+
+
+  nav a:hover {
+      color: black;
+      background: rgba(50,50,50, 0.3);
+  }
+
   .main-selector {
       position: relative;
       text-align: center;
@@ -72,3 +124,5 @@
     height: 25vh;
     object-fit: contain;
 }
+
+
