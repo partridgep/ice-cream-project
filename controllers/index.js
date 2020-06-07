@@ -1,7 +1,8 @@
 const IceCream = require('../models/icecream');
 
 module.exports = {
-    index
+    index,
+    new: newIceCream
 };
 
 function index(req, res) {
@@ -11,4 +12,13 @@ function index(req, res) {
             iceCreams,
             user: req.user});
       });
+};
+
+function newIceCream(req, res) {
+    IceCream.find({}, function(err, iceCreams) {
+        res.render('new', { 
+            title: 'Add Ice Cream ',
+            iceCreams,
+            user: req.user});
+    });
 };

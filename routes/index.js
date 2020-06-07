@@ -3,6 +3,8 @@ const passport = require('passport');
 const router = express.Router();
 const indexCtrl = require('../controllers/index');
 
+router.get('/new', indexCtrl.new);
+
 router.get('/', indexCtrl.index);
 
 // Google OAuth login route

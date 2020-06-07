@@ -15,11 +15,12 @@
       <div id='user_nav'>
       <% if (user) { %>
         <a id='user-ice-creams' href="/user">
-          <% if (user.avatarURL) { %>
-            <img class="user_photo" src="<%= user.avatarURL %>" alt="User Picture">
-          <% } %>
-          My Ice Creams
-        <a href='/logout'><i class="material-icons left">trending_flat</i>Log Out</a>
+            <% if (user.avatarURL) { %>
+                <img class="user_photo" src="<%= user.avatarURL %>" alt="User Picture">
+                <% } %>
+                My Ice Creams
+                <a href='/new'>Add Ice Cream</a>
+                <a href='/logout'><i class="material-icons left">trending_flat</i>Log Out</a>
         <% } else { %>
           <a href="/auth/google"><i class="material-icons left">vpn_key</i>Login with Google</a>
       <% } %>

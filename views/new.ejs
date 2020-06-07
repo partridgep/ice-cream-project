@@ -1,0 +1,23 @@
+<%- include('./partials/header') %>
+
+<h1>Add Ice Cream</h1>
+
+<form id="new-form" action="/" method="POST">
+    <label>Name: *</label>
+    <input type="text" name="name">
+    <label>Select Flavor *</label>
+    <select name="flavor">
+        <option value="Vanilla">Vanilla</option>
+        <option value="Other">Other</option>
+      </select>
+    <label>Other:</label>
+    <input type="text" name="flavor">
+    <label>Brand: *</label>
+    <select name="brand">
+      <option value="Ben & Jerry's">Ben & Jerry's</option>
+      <option value="Other">Other</option>
+    </select>
+    <label>Other:</label>
+    <input type="text" name="flavor">
+    <input type="submit" value="Add Ice Cream">
+  </form>
