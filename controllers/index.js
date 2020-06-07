@@ -7,6 +7,8 @@ module.exports = {
 function index(req, res) {
     IceCream.find({}, function(err, iceCreams) {
         console.log(iceCreams);
-        res.render('index', {iceCreams});
+        res.render('index', {
+            iceCreams,
+            user: req.user});
       });
 };

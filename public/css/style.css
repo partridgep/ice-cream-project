@@ -41,7 +41,6 @@
   }
 
   .user_photo {
-    display: inline;
     position: absolute;
     margin-left: -50px;
     margin-top: -7px;
