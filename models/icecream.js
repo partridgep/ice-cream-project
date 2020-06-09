@@ -5,7 +5,7 @@ const Schema = mongoose.Schema;
 const iceCreamSchema = new Schema({
     name: {
         type: String,
-        unique: true
+        //unique: true
     },
     flavorName: {
         type: String,
@@ -15,7 +15,7 @@ const iceCreamSchema = new Schema({
     brandName: {
         type: String,
         required: true,
-},
+    },
     brandImage: String,
     image: String,
     url: String,
