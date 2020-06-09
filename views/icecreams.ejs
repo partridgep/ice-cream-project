@@ -1,18 +1,19 @@
 <%- include('./partials/header') %>
 
-  <h1>Ice Cream Comparison</h1>
+<h1>Ice Cream Comparison</h1>
 
 
-  <% iceCreams.forEach(function(i) { %>
-      <a href="<%= i.url %>">
-        <div class='ice-cream'>
-            <img src='<%= i.image %>'>
-        </div>
-      </a>
-      <p><%= i.name %></p>
-      <p>Description: <span> <%= i.description %></span></p>
-      <p>Rating: <span> <%= i.rating %></span></p>
-    <% }); %>
+<% iceCreams.forEach(function(i) { %>
+<a href="<%= i.url %>">
+  <div class='ice-cream'>
+    <img src='<%= i.image %>'>
+  </div>
+</a>
+<p><%= i.name %></p>
+<p>Description: <span> <%= i.description %></span></p>
+<p>Rating: <span> <%= i.rating %></span></p>
+<% }); %>
 
 </body>
+
 </html>

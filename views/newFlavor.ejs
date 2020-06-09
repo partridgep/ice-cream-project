@@ -1,0 +1,17 @@
+
+
+<main>
+
+  <h1>Add Flavor Image</h1>
+
+  <p>You have entered the new flavor of <%= iceCream.flavorName %>.</p>
+  <p>Please provide a link to an image of this flavor (for example, you can include an image of coffee beans for a coffee flavor.)</p>
+
+  <form id="new-form" action="/flavor" method="PUT">
+    <label>Enter Image Link to Flavor:</label>
+    <input type="text" name="flavorImage">
+    <input type="submit" value="Add Image Link">
+  </form>
+
+
+</main>

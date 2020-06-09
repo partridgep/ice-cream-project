@@ -1,23 +1,48 @@
 <%- include('./partials/header') %>
 
-<h1>Add Ice Cream</h1>
+<main>
 
-<form id="new-form" action="/" method="POST">
-    <label>Name: *</label>
-    <input type="text" name="name">
-    <label>Select Flavor *</label>
+  <h1>Add Ice Cream</h1>
+
+  <form id="new-form" action="/" method="POST">
+    <label>Enter a Description for this Ice Cream:*</label>
+    <input type="text" name="description">
+    <label>Enter Image Link to Ice Cream:*</label>
+    <input type="text" name="image">
+    <label>Enter Link to Buy Ice Cream:*</label>
+    <input type="text" name="url">
+    <label>Select Closest Flavor (e.g. 'Cookie Dough' for 'The Tonight Dough') *</label>
     <select name="flavor">
-        <option value="Vanilla">Vanilla</option>
-        <option value="Other">Other</option>
-      </select>
-    <label>Other:</label>
-    <input type="text" name="flavor">
-    <label>Brand: *</label>
-    <select name="brand">
-      <option value="Ben & Jerry's">Ben & Jerry's</option>
+      <% let listOfFlavors = [] %>
+      <% iceCreams.forEach(function(i) { %>
+        <% if (!listOfFlavors.includes(i.flavorName)) { %>
+        <option value="<%= i.flavorName %>"><%= i.flavorName %></option>
+        <% listOfFlavors.push(i.flavorName); %>
+        <% } %> 
+        <% }); %>
       <option value="Other">Other</option>
     </select>
     <label>Other:</label>
-    <input type="text" name="flavor">
+    <input type="text" name="newFlavor">
+    <label>Brand: *</label>
+    <select name="brand">
+      <% let listOfBrands = [] %>
+      <% iceCreams.forEach(function(i) { %>
+        <% if (!listOfBrands.includes(i.brandName)) { %>
+        <option value="<%= i.brandName %>"><%= i.brandName %></option>
+        <% listOfBrands.push(i.brandName); %>
+        <% } %> 
+        <% }); %>
+      <option value="Other">Other</option>
+    </select>
+    <label>Other:</label>
+    <input type="text" name="newBrand">
+    <label>Enter Image Link to Brand (if entering new brand):</label>
+    <input type="text" name="flavorImage">
+    <label>Name (if different from flavor): </label>
+    <input type="text" name="name">
     <input type="submit" value="Add Ice Cream">
   </form>
+
+
+</main>

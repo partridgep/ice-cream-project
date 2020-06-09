@@ -60,6 +60,13 @@
       background: rgba(50,50,50, 0.3);
   }
 
+  main {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+  }
+
   .main-selector {
       position: relative;
       text-align: center;
@@ -91,26 +98,15 @@
     position: relative;
     text-align: center;
     height: 25vh;
+    width: 350px;
     margin-bottom: 20px;
-}
-
-.flavor-selector > img {
-    height: 25vh;
-    object-fit: cover;
-    border: 2px solid grey;
-    border-radius: 10px;
-    object-fit: cover;
-}
-
-.flavor-selector > p {
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -120%);
     font-size: 40px;
+    color: rgb(41, 40, 40);
+    text-shadow: 3px 2px azure;
     text-transform: uppercase;
-    color: black;
-    background-color: rgb(250,240,240,.7);
+    background-size: cover;
+    border-radius: 10px;
+    border: 2px solid black;
 }
 
 .ice-cream {
@@ -122,6 +118,29 @@
 .ice-cream > img {
     height: 25vh;
     object-fit: contain;
+}
+
+#new-form {
+    display: grid;
+    grid-gap: 10px;
+    grid-template-columns: repeat(2, minmax(auto, 22rem));
+}
+
+#new-form *,  #add-review-form *,
+#add-performer-form * {
+  font-size: 20px;
+  padding: 5px;
+  border-radius: 5px;
+}
+
+#new-form input[type="submit"] {
+    grid-column: span 2;
+    width: 10rem;
+    margin-left: auto;
+  }
+
+#new-form label {
+    text-align: right;
 }
 
 

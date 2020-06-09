@@ -5,6 +5,8 @@ const indexCtrl = require('../controllers/index');
 
 router.get('/new', indexCtrl.new);
 
+router.post('/', indexCtrl.create);
+
 router.get('/', indexCtrl.index);
 
 // Google OAuth login route

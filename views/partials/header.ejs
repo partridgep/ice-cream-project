@@ -1,28 +1,30 @@
 <html lang="en">
+
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
-   <!-- Materialize Icons -->
-   <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+  <!-- Materialize Icons -->
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
   <link rel='stylesheet' href='/css/style.css' />
   <title>Ice Cream Selector</title>
 </head>
+
 <body>
 
   <nav>
-      <p id="home"><a href="/">Home</a></p>
-      <div id='user_nav'>
+    <p id="home"><a href="/">Home</a></p>
+    <div id='user_nav'>
       <% if (user) { %>
-        <a id='user-ice-creams' href="/user">
-            <% if (user.avatarURL) { %>
-                <img class="user_photo" src="<%= user.avatarURL %>" alt="User Picture">
-                <% } %>
-                My Ice Creams
-                <a href='/new'>Add Ice Cream</a>
-                <a href='/logout'><i class="material-icons left">trending_flat</i>Log Out</a>
+      <a id='user-ice-creams' href="/user">
+        <% if (user.avatarURL) { %>
+        <img class="user_photo" src="<%= user.avatarURL %>" alt="User Picture">
+        <% } %>
+        My Ice Creams
+        <a href='/new'>Add Ice Cream</a>
+        <a href='/logout'><i class="material-icons left">trending_flat</i>Log Out</a>
         <% } else { %>
-          <a href="/auth/google"><i class="material-icons left">vpn_key</i>Login with Google</a>
-      <% } %>
+        <a href="/auth/google"><i class="material-icons left">vpn_key</i>Login with Google</a>
+        <% } %>
     </div>
   </nav>
