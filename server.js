@@ -10,6 +10,7 @@ require('dotenv').config()
 
 const indexRouter = require('./routes/index');
 const flavorsRouter = require('./routes/flavors');
+const brandsRouter = require('./routes/brands');
 const iceCreamRouter = require('./routes/icecreams');
 
 // Set up express app
@@ -47,6 +48,7 @@ app.use(passport.session());
 // Mount routes with app.use()
 app.use('/', indexRouter);
 app.use('/flavors', flavorsRouter);
+app.use('/brands', brandsRouter);
 app.use('/:id', iceCreamRouter);
 
 // Tell App to listen

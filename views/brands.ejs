@@ -1,0 +1,20 @@
+<%- include('./partials/header') %>
+
+<h1>Brand Selector</h1>
+
+<% let listOfBrands = [] %>
+
+<% iceCreams.forEach(function(i) { %>
+<% if (!listOfBrands.includes(i.brandName)) { %>
+
+<form id="flavor-form" action="/brands/<%= i.brandName %>" method="GET">
+  <input class='flavor-selector' type='submit' value='<%= i.brandName %>' name='brandName' style="background-image: url('<%= i.brandImage %>')">
+</form>
+
+<% listOfBrands.push(i.brandName); %>
+<% } %>
+<% }); %>
+
+</body>
+
+</html>

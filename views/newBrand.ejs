@@ -1,0 +1,17 @@
+<%- include('./partials/header') %>
+
+<main>
+
+  <h1>Add Brand Image</h1>
+
+  <p>You have entered the new brand of <%= iceCream.brandName %>.</p>
+  <p>Please provide a link to an image of this brand.</p>
+
+  <form id="new-form" action="/brand/<%= iceCream._id %>?_method=PUT" method="POST">
+    <label>Enter Image Link to Brand:</label>
+    <input type="text" name="brandImage">
+    <input type="submit" value="Add Image Link">
+  </form>
+
+
+</main>
