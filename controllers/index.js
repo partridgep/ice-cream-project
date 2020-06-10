@@ -1,5 +1,15 @@
 const IceCream = require('../models/icecream');
 
+class iceCreamConstruction {
+  constructor(flavor, flavorImage, brand, brandImage, name) {
+    this.flavor = flavor;
+    this.flavorImage = flavorImage;
+    this.brand = brand;
+    this.brandImage = brandImage;
+    this.name = name;
+  };
+};
+
 module.exports = {
     index,
     new: newIceCream,
@@ -29,25 +39,49 @@ function create(req, res) {
     console.log('adding new')
     console.log(req.body);
 
-    let thisFlavor;
+    /*let thisFlavor;
     let thisFlavorImage;
+    let thisBrand;
+    let thisBrandImage;
+    let thisName; */
+    let iceCreamConstructor = new iceCreamConstruction();
     let addingNewFlavor = false;
+    let addingNewBrand = false;
 
     if (req.body.flavor === 'Other') {
-      thisFlavor = req.body.newFlavor;
+      //thisFlavor = req.body.newFlavor;
+      iceCreamConstructor.flavor = req.body.newFlavor;
       addingNewFlavor = true;
     } else {
-      thisFlavor = req.body.flavor;
-    }
+      //thisFlavor = req.body.flavor;
+      iceCreamConstructor.flavor = req.body.flavor;
+    };
+
+    if (req.body.brand === 'Other') {
+      //thisBrand = req.body.newBrand;
+      iceCreamConstructor.brand = req.body.newBrand;
+      addingNewBrand = true;
+    } else {
+      //thisBrand = req.body.brand;
+      iceCreamConstructor.brand = req.body.brand;
+    };
+
+    if (!req.body.name) {
+      //thisName = `${thisFlavor} (${thisBrand})`;
+      iceCreamConstructor.name = `${thisFlavor} (${thisBrand})`;
+    } else {
+      //thisName = `${req.body.name} (${thisBrand})`;
+      iceCreamConstructor.name = `${req.body.name} (${thisBrand})`;
+    };
 
     if (!addingNewFlavor) {
-      IceCream.findOne({flavor: thisFlavor}, function(err, sameFlavor) {
-        thisFlavorImage = sameFlavor.flavorImage;
-        iceCream = createHelper(req.body, thisFlavor, thisFlavorImage);
+      IceCream.findOne({flavor: iceCreamConstructor.flavor}, function(err, sameFlavor) {
+        iceCreamConstructor.flavorImage = sameFlavor.flavorImage;
+        iceCream = createHelper(req.body, iceCreamConstructor);
         saveIceCream(iceCream, req, res);
       });
     } else {
-      iceCream = createHelper(req.body, thisFlavor, null);
+      iceCream = createHelper(req.body, iceCreamConstructor);
       saveIceCream(iceCream, addingNewFlavor, req, res)
     };
   };
