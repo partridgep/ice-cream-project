@@ -1,4 +1,4 @@
-
+<%- include('./partials/header') %>
 
 <main>
 
@@ -7,7 +7,7 @@
   <p>You have entered the new flavor of <%= iceCream.flavorName %>.</p>
   <p>Please provide a link to an image of this flavor (for example, you can include an image of coffee beans for a coffee flavor.)</p>
 
-  <form id="new-form" action="/flavor" method="PUT">
+  <form id="new-form" action="/flavors/<%= iceCream._id %>?_method=PUT" method="POST">
     <label>Enter Image Link to Flavor:</label>
     <input type="text" name="flavorImage">
     <input type="submit" value="Add Image Link">

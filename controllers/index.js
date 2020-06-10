@@ -1,12 +1,14 @@
 const IceCream = require('../models/icecream');
 
 class iceCreamConstruction {
-  constructor(flavor, flavorImage, brand, brandImage, name) {
+  constructor(flavor, flavorImage, brand, brandImage, name, addingNewFlavor, addingNewBrand) {
     this.flavor = flavor;
     this.flavorImage = flavorImage;
     this.brand = brand;
     this.brandImage = brandImage;
     this.name = name;
+    this.addingNewFlavor = addingNewFlavor;
+    this.addingNewBrand = addingNewBrand
   };
 };
 
@@ -38,67 +40,60 @@ function create(req, res) {
 
     console.log('adding new')
     console.log(req.body);
+    console.log(req.body.brand);
+    console.log(req.body.brandName);
 
-    /*let thisFlavor;
-    let thisFlavorImage;
-    let thisBrand;
-    let thisBrandImage;
-    let thisName; */
     let iceCreamConstructor = new iceCreamConstruction();
     let addingNewFlavor = false;
     let addingNewBrand = false;
 
     if (req.body.flavor === 'Other') {
-      //thisFlavor = req.body.newFlavor;
       iceCreamConstructor.flavor = req.body.newFlavor;
       addingNewFlavor = true;
     } else {
-      //thisFlavor = req.body.flavor;
       iceCreamConstructor.flavor = req.body.flavor;
     };
 
     if (req.body.brand === 'Other') {
-      //thisBrand = req.body.newBrand;
       iceCreamConstructor.brand = req.body.newBrand;
       addingNewBrand = true;
     } else {
-      //thisBrand = req.body.brand;
       iceCreamConstructor.brand = req.body.brand;
     };
 
     if (!req.body.name) {
-      //thisName = `${thisFlavor} (${thisBrand})`;
-      iceCreamConstructor.name = `${thisFlavor} (${thisBrand})`;
+      iceCreamConstructor.name = `${iceCreamConstructor.flavor} (${iceCreamConstructor.brand})`;
     } else {
-      //thisName = `${req.body.name} (${thisBrand})`;
-      iceCreamConstructor.name = `${req.body.name} (${thisBrand})`;
+      iceCreamConstructor.name = `${req.body.name} (${iceCreamConstructor.brand})`;
     };
 
     if (!addingNewFlavor) {
       IceCream.findOne({flavor: iceCreamConstructor.flavor}, function(err, sameFlavor) {
         iceCreamConstructor.flavorImage = sameFlavor.flavorImage;
         iceCream = createHelper(req.body, iceCreamConstructor);
-        saveIceCream(iceCream, req, res);
+        saveIceCream(iceCream, addingNewFlavor, addingNewBrand, req, res);
       });
     } else {
       iceCream = createHelper(req.body, iceCreamConstructor);
-      saveIceCream(iceCream, addingNewFlavor, req, res)
+      saveIceCream(iceCream, addingNewFlavor, addingNewBrand, req, res);
     };
   };
   
-  function createHelper(body, thisFlavor, thisFlavorImage) {
+  function createHelper(body, iceCreamConstructor) {
     const iceCream = new IceCream({
       description: body.description,
       image: body.image,
-      flavorName: thisFlavor,
-      flavorImage: thisFlavorImage,
-      brandName: body.brand,
-      name: body.name
+      url: body.url,
+      flavorName: iceCreamConstructor.flavor,
+      flavorImage: iceCreamConstructor.flavorImage,
+      brandName: iceCreamConstructor.brand,
+      brandImage: iceCreamConstructor.brandImage,
+      name: iceCreamConstructor.name
     });
     return iceCream;
   };
   
-  function saveIceCream(iceCream, addingNewFlavor, req, res) {
+  function saveIceCream(iceCream, addingNewFlavor, addingNewBrand, req, res) {
     iceCream.save(function(err) {
       if (err) {
         console.log(err);
@@ -106,12 +101,11 @@ function create(req, res) {
       };
       console.log(iceCream);
       if (addingNewFlavor) {
-        console.log(req.user);
-        res.render('newFlavor'), { 
+        res.render('newFlavor', { 
           iceCream,
           title: 'Add Flavor Image',
           user: req.user
-        }
+        });
       } else {
         res.redirect('/');
       }

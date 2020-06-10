@@ -7,4 +7,6 @@ router.get('/:flavorName', flavorsCtrl.show);
 
 router.get('/', flavorsCtrl.index);
 
+router.put('/:id', flavorsCtrl.update);
+
 module.exports = router;

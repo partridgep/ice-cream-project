@@ -24,6 +24,11 @@ require('./config/passport');
 app.set('view engine', 'ejs');
 
 // Mount middleware with app.use()
+app.use(function(req, res, next) {
+    //console.log(req)
+    //attach property to request object
+    next();
+})
 app.use(morgan('dev'));
 app.use(express.static('public'));
 app.use(methodOverride('_method'));
