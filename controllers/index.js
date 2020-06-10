@@ -68,14 +68,31 @@ function create(req, res) {
     };
 
     if (!addingNewFlavor) {
-      IceCream.findOne({flavor: iceCreamConstructor.flavor}, function(err, sameFlavor) {
+      IceCream.findOne({flavorName: iceCreamConstructor.flavor}, function(err, sameFlavor) {
         iceCreamConstructor.flavorImage = sameFlavor.flavorImage;
-        iceCream = createHelper(req.body, iceCreamConstructor);
-        saveIceCream(iceCream, addingNewFlavor, addingNewBrand, req, res);
+
+        if(!addingNewBrand) {
+          IceCream.findOne({brandName: iceCreamConstructor.brand}, function(err, sameBrand) {
+            iceCreamConstructor.brandImage = sameBrand.brandImage;
+            iceCream = createHelper(req.body, iceCreamConstructor);
+            saveIceCream(iceCream, addingNewFlavor, addingNewBrand, req, res);
+          });
+        } else {
+          iceCream = createHelper(req.body, iceCreamConstructor);
+          saveIceCream(iceCream, addingNewFlavor, addingNewBrand, req, res);
+        };
       });
     } else {
-      iceCream = createHelper(req.body, iceCreamConstructor);
-      saveIceCream(iceCream, addingNewFlavor, addingNewBrand, req, res);
+      if(!addingNewBrand) {
+        IceCream.findOne({brandName: iceCreamConstructor.brand}, function(err, sameBrand) {
+          iceCreamConstructor.brandImage = sameBrand.brandImage;
+          iceCream = createHelper(req.body, iceCreamConstructor);
+          saveIceCream(iceCream, addingNewFlavor, addingNewBrand, req, res);
+        });
+      } else {
+        iceCream = createHelper(req.body, iceCreamConstructor);
+        saveIceCream(iceCream, addingNewFlavor, addingNewBrand, req, res);
+      }; 
     };
   };
   
@@ -104,8 +121,15 @@ function create(req, res) {
         res.render('newFlavor', { 
           iceCream,
           title: 'Add Flavor Image',
-          user: req.user
+          user: req.user,
+          addingNewBrand
         });
+      } else if (addingNewBrand) {
+        res.render('newBrand', {
+          iceCream,
+          title: 'Add Brand Image',
+          user: req.user
+        })
       } else {
         res.redirect('/');
       }
