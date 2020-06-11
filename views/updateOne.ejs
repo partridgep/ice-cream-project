@@ -1,0 +1,52 @@
+<%- include('./partials/header') %>
+
+<main>
+
+  <h1>Update <%= iceCream.name %></h1>
+
+  <p>Choose the field you would like to update for <%= iceCream.name %>.</p>
+  
+    <form id="new-form" action="/iceCreams/<%= iceCream._id %>" method="POST">
+      <label>Change the Description for this Ice Cream:</label>
+      <input type="text" name="description" value="<%= iceCream.description %>">
+      <label>Change Image Link to Ice Cream:</label>
+      <input type="text" name="image" value="<%= iceCream.image %>">
+      <label>Change Link to Buy Ice Cream:</label>
+      <input type="text" name="url" value="<%= iceCream.url %>">
+      <label>Change Flavor: </label>
+      <select name="flavor">
+        <% let listOfFlavors = [] %>
+        <option selected value="<%= iceCream.flavorName %>"><%= iceCream.flavorName %></option>
+        <% listOfFlavors.push(iceCream.flavorName); %>
+        <% allIceCreams.forEach(function(i) { %>
+          <% if (!listOfFlavors.includes(i.flavorName)) { %>
+          <option value="<%= i.flavorName %>"><%= i.flavorName %></option>
+          <% listOfFlavors.push(i.flavorName); %>
+          <% } %> 
+          <% }); %>
+        <option value="Other">Other</option>
+      </select>
+      <label>Other:</label>
+      <input type="text" name="newFlavor">
+      <label>Change Brand: </label>
+      <select name="brand">
+        <% let listOfBrands = [] %>
+        <option selected value="<%= iceCream.brandName %>"><%= iceCream.brandName %></option>
+        <% listOfBrands.push(iceCream.brandName); %>
+        <% allIceCreams.forEach(function(i) { %>
+          <% if (!listOfBrands.includes(i.brandName)) { %>
+          <option value="<%= i.brandName %>"><%= i.brandName %></option>
+          <% listOfBrands.push(i.brandName); %>
+          <% } %> 
+          <% }); %>
+        <option value="Other">Other</option>
+      </select>
+      <label>Other:</label>
+      <input type="text" name="newBrand">
+      <label>Change Name: </label>
+      <input type="text" name="name" value="<%= iceCream.name %>">
+      <input type="submit" value="Update">
+    </form>
+
+
+</main>

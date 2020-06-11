@@ -5,7 +5,7 @@
 <div id='selector-flex'>
 <% iceCreams.forEach(function(i) { %>
   <div id='individual-ice-cream'>
-    <p id='edit'><a href="">Edit</a></p>
+    <p id='edit'><a href="/iceCreams/<%= i._id %>">Edit</a></p>
     <a href="<%= i.url %>" target="_blank">
       <div class='ice-cream'>
         <img src='<%= i.image %>'>

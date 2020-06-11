@@ -1,14 +1,22 @@
 const IceCream = require('../models/icecream');
 
 module.exports = {
-  index
+  show
 };
 
-function index(req, res) {
-  IceCream.find({}, function(err, iceCreams) {
-    res.render('icecreams', { 
-      iceCreams,
-      user: req.user
+function show(req, res) {
+  IceCream.find({}, function(err, allIceCreams) {
+    console.log(req.params.id)
+    IceCream.findOne({_id: req.params.id}, req.user, allIceCreams, function(err, iceCream) {
+      console.log(iceCream.name)
+      for (i of allIceCreams) {
+        console.log(i.name);
+      }
+      res.render('updateOne', { 
+        iceCream,
+        allIceCreams,
+        user: req.user
+    })
      });
   });
 };

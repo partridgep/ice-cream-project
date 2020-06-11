@@ -3,6 +3,6 @@ const passport = require('passport');
 const router = express.Router();
 const iceCreamCtrl = require('../controllers/icecreams');
 
-//router.get('/:flavorName', iceCreamCtrl.index);
+router.get('/:id', iceCreamCtrl.show);
 
 module.exports = router;
