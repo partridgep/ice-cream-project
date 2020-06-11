@@ -6,7 +6,7 @@
 
   <p>Choose the field you would like to update for <%= iceCream.name %>.</p>
   
-    <form id="new-form" action="/iceCreams/<%= iceCream._id %>" method="POST">
+    <form id="new-form" action="/iceCreams/<%= iceCream._id %>?_method=PUT" method="POST">
       <label>Change the Description for this Ice Cream:</label>
       <input type="text" name="description" value="<%= iceCream.description %>">
       <label>Change Image Link to Ice Cream:</label>
@@ -26,6 +26,8 @@
           <% }); %>
         <option value="Other">Other</option>
       </select>
+      <label>Change Flavor Image Link:</label>
+      <input type="text" name="flavorImage" value="<%= iceCream.flavorImage %>">
       <label>Other:</label>
       <input type="text" name="newFlavor">
       <label>Change Brand: </label>
@@ -43,6 +45,8 @@
       </select>
       <label>Other:</label>
       <input type="text" name="newBrand">
+      <label>Change Brand Image Link:</label>
+      <input type="text" name="brandImage" value="<%= iceCream.brandImage %>">
       <label>Change Name: </label>
       <input type="text" name="name" value="<%= iceCream.name %>">
       <input type="submit" value="Update">
