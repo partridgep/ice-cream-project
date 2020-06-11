@@ -1,39 +1,51 @@
 const IceCream = require('../models/icecream');
 
+//___________Exports________________//
+
 module.exports = {
   index,
   show,
   update
 };
 
-function show(req, res) {
-  IceCream.find({ brandName: req.params.brandName }, function(err, iceCreams) {
-    res.render('brandsFlavors', { 
-      iceCreams,
-      user: req.user
-     });
-  });
-};
+//___________RESTful Functions (get called in Router)________________//
 
-function index(req, res) {
-  IceCream.find({}, function(err, iceCreams) {
-    res.render('brands', { 
+// function that gets called when user selects a brand
+function show(req, res) {
+  // query all ice creams of the same brand
+  IceCream.find({ brandName: req.params.brandName }, function (err, iceCreams) {
+    // render view for that flavor
+    res.render('brandsFlavors', {
       iceCreams,
       user: req.user
     });
   });
 };
 
+// function that gets called when user chooses to select by brand
+function index(req, res) {
+  // query ALL ice creams
+  IceCream.find({}, function (err, iceCreams) {
+    // render view of brands
+    res.render('brands', {
+      iceCreams,
+      user: req.user
+    });
+  });
+};
+
+// function that gets called when user enters new brand when adding new ice cream
 function update(req, res) {
-  console.log('updating');
-  IceCream.findOneAndUpdate({_id: req.params.id}, req.body, function(err, iceCream) {
-    console.log(req.body);
-    console.log(req.body.brandImage);
+  //find ice cream in question to update
+  IceCream.findOneAndUpdate({ _id: req.params.id }, req.body, function (err, iceCream) {
+    // save brand image as link entered
     iceCream.brandImage = req.body.brandImage;
-    iceCream.save(function(err) {
+    // save info
+    iceCream.save(function (err) {
       if (err) {
         console.log(err);
       };
+      // redirect user to view of brands
       return res.redirect('/brands');
     })
   });

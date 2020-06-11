@@ -2,18 +2,22 @@
 
 <h1>Flavors for <%= iceCreams[0].brandName %></h1>
 
-<% let listOfFlavors = [] %>
+<div id='selector-flex'>
 
-<% iceCreams.forEach(function(i) { %>
-<% if (!listOfFlavors.includes(i.flavorName)) { %>
+  <% let listOfFlavors = [] %>
 
-<form id="flavor-form" action="/flavors/<%= i.flavorName %>" method="GET">
-  <input class='flavor-selector' type='submit' value='<%= i.flavorName %>' name='flavorName' style="background-image: url('<%= i.flavorImage %>')">
-</form>
+  <% iceCreams.forEach(function(i) { %>
+  <% if (!listOfFlavors.includes(i.flavorName)) { %>
 
-<% listOfFlavors.push(i.flavorName); %>
-<% } %>
-<% }); %>
+  <form id="flavor-form" action="/flavors/<%= i.flavorName %>" method="GET">
+    <input class='flavor-selector' type='submit' value='<%= i.flavorName %>' name='flavorName' style="background-image: url('<%= i.flavorImage %>')">
+  </form>
+
+  <% listOfFlavors.push(i.flavorName); %>
+  <% } %>
+  <% }); %>
+
+</div>
 
 </body>
 

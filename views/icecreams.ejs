@@ -3,7 +3,7 @@
 <h1>Ice Cream Comparison</h1>
 
 <div id='selector-flex'>
-<% iceCreams.forEach(function(i) { %>
+  <% iceCreams.forEach(function(i) { %>
   <div id='individual-ice-cream'>
     <p id='edit'><a href="/iceCreams/<%= i._id %>">Edit</a></p>
     <a href="<%= i.url %>" target="_blank">
@@ -13,36 +13,44 @@
     </a>
     <p id='name'><%= i.name %></p>
     <p id='description'><span>Description:</span> <%= i.description %></p>
-    <p id='rating'><span>Rating:</span>  
+    <p id='rating'><span>Rating:</span>
       <% if (i.reviews.length) { %>
-        <!--First let's set up a total variable -->
-        <% let total = 0 %>  
-        <% i.reviews.forEach(function(r) { %>
-          <!-- We'll aggregate the total ratings -->
-          <% total += r.rating %>
-        <% }) %>
-        <%= (total / i.reviews.length).toFixed(0) %>
+      <!--First let's set up a total variable -->
+      <% let total = 0 %>
+      <% i.reviews.forEach(function(r) { %>
+      <!-- We'll aggregate the total ratings -->
+      <% total += r.rating %>
+      <% }) %>
+      <%= (total / i.reviews.length).toFixed(0) %>
       <% } else { %>
-          <% let placeholder="No Ratings Yet" %>
-          <%= placeholder %>
+      <% let placeholder="No Ratings Yet" %>
+      <%= placeholder %>
       <% } %>
 
     </p>
-    <button>Add Rating</button>
-    <p id='review'><span>Reviews:</span>  
+    <p id='user-rating'><span>My Rating:</span>
+    <form id="rating-form" action="/:id/rating" method="POST">
+
+      <button class="start type="submit" name="rating"><i class="material-icons left">star</i></button>
+      <button class="start type="submit" name="rating"><i class="material-icons left">star</i></button>
+      <button class="start type="submit" name="rating"><i class="material-icons left">star</i></button>
+      <button class="start type="submit" name="rating"><i class="material-icons left">star</i></button>
+      <button class="start type="submit" name="rating"><i class="material-icons left">star</i></button>
+    </form>
+    <p id='review'><span>Reviews:</span>
       <% if (i.reviews.length) { %>
-        <% i.reviews.forEach(function(r) { %>
-          <!-- We'll aggregate the total ratings -->
-          <%= i.reviews.content %>
-        <% }) %>
+      <% i.reviews.forEach(function(r) { %>
+      <!-- We'll aggregate the total ratings -->
+      <%= i.reviews.content %>
+      <% }) %>
       <% } else { %>
-        <% let placeholder="No Reviews Yet" %>
-          <%= placeholder %>
+      <% let placeholder="No Reviews Yet" %>
+      <%= placeholder %>
       <% } %>
     </p>
     <button id="addReviewBtn">Add Review</button>
   </div>
-<% }); %>
+  <% }); %>
 </div>
 
 </body>
