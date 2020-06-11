@@ -28,13 +28,20 @@ function update(req, res) {
   console.log('updating');
   IceCream.findOneAndUpdate({_id: req.params.id}, req.body, function(err, iceCream) {
     console.log(req.body);
-    console.log(req.body.flavorImage);
     iceCream.flavorImage = req.body.flavorImage;
     iceCream.save(function(err) {
       if (err) {
         console.log(err);
       };
-      return res.redirect('/flavors');
+      if (req.body.addingNewBrand) {
+        res.render('newBrand', {
+          iceCream,
+          title: 'Add Brand Image',
+          user: req.user
+        })
+      } else {
+        return res.redirect('/flavors');
+      }
     })
   });
 };

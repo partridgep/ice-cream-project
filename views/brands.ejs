@@ -2,18 +2,22 @@
 
 <h1>Brand Selector</h1>
 
-<% let listOfBrands = [] %>
+<div id='selector-flex'>
 
-<% iceCreams.forEach(function(i) { %>
-<% if (!listOfBrands.includes(i.brandName)) { %>
+  <% let listOfBrands = [] %>
 
-<form id="flavor-form" action="/brands/<%= i.brandName %>" method="GET">
-  <input class='flavor-selector' type='submit' value='<%= i.brandName %>' name='brandName' style="background-image: url('<%= i.brandImage %>')">
-</form>
+  <% iceCreams.forEach(function(i) { %>
+    <% if (!listOfBrands.includes(i.brandName)) { %>
 
-<% listOfBrands.push(i.brandName); %>
-<% } %>
-<% }); %>
+      <form id="flavor-form" action="/brands/<%= i.brandName %>" method="GET">
+        <button class='flavor-selector' type='submit' value='<%= i.brandName %>' name='brandName' style="background-image: url('<%= i.brandImage %>')"><%= i.brandName %></button>
+      </form>
+
+      <% listOfBrands.push(i.brandName); %>
+    <% } %>
+  <% }); %>
+
+</div>
 
 </body>
 

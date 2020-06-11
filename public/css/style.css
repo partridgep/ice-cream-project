@@ -1,6 +1,6 @@
 * {
     box-sizing: border-box;
-    font-family: Helvetica;
+    font-family: Arial, Helvetica, sans-serif;
     text-align: center;
   }
 
@@ -10,6 +10,7 @@
   }
 
   nav {
+    font-family: Arial, Helvetica, sans-serif;
     display: flex;
     flex-direction: row;
     justify-content: center;
@@ -67,46 +68,72 @@
       align-items: center;
   }
 
-  .main-selector {
+  .main-selector, .flavor-selector {
       position: relative;
       text-align: center;
-      height: 400px;
-      margin-bottom: 20px;
-  }
-
-  .main-selector > img {
-      width: 75vw;
-      height: 400px;
-      object-fit: cover;
-      border: 2px solid grey;
-      border-radius: 10px;
-      object-fit: cover;
-  }
-
-  .main-selector > p {
-      position: absolute;
-      top: 50%;
-      left: 50%;
-      transform: translate(-50%, -100%);
-      font-size: 50px;
       text-transform: uppercase;
-      color: black;
-      background-color: rgb(250,240,240,.7);
+      background-size: cover;
+      background-position: center;
+      border-radius: 10px;
+      box-shadow: 0 4px 8px 0 rgba(0, 0, 
+  0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+      outline: none;
+  }
+
+  .main-selector {
+    font-family: 'Bangers', cursive;
+    width: 75vw;
+    height: 400px;
+    color: rgb(255, 252, 103);
+    -webkit-text-stroke: 1px rgb(0,0,0,1);
+    font-weight: 900;
+    text-shadow: 3px 2px black;
+    margin: 10px;
+    font-size: 100px;
+    border: 2px solid grey;
   }
 
   .flavor-selector {
-    position: relative;
-    text-align: center;
+    font-family: 'Acme', sans-serif;
     height: 25vh;
     width: 350px;
-    margin-bottom: 20px;
-    font-size: 40px;
     color: rgb(41, 40, 40);
     text-shadow: 3px 2px azure;
-    text-transform: uppercase;
-    background-size: cover;
-    border-radius: 10px;
+    margin: 20px;
+    font-size: 40px;
     border: 2px solid black;
+  }
+
+.main-selector:hover{
+    width: 77vw;
+    color: rgb(255, 200, 98);
+    text-shadow: 5px 5px black;
+    font-weight: 400;
+    border: 3px solid black;
+    transition: all 0.2s;
+}
+
+.flavor-selector:hover {
+    height: 26vh;
+    color: rgb(199, 120, 241);
+    text-shadow: 3px 2px black;
+    -webkit-text-stroke: 1px rgb(0,0,0,0.5);
+    font-weight: 800;
+    transition: all 0.2s;
+    border: 3px solid black;
+}
+
+.flavor-selector:focus {
+    border: 3px solid blue;
+    font-weight: 800;
+    color: rgb(199, 120, 241);
+    text-shadow: 3px 2px black;
+}
+
+.flavor-selector:active {
+    border: 3px solid blue;
+    text-shadow: 3px 2px black;
+    color: rgb(255, 255, 255);
 }
 
 .ice-cream {
@@ -141,6 +168,17 @@
 
 #new-form label {
     text-align: right;
+}
+
+#selector-flex {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+h1 {
+    font-family: 'Acme', sans-serif;
+    font-size: 45px;
 }
 
 

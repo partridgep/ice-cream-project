@@ -10,6 +10,7 @@
   <form id="new-form" action="/flavors/<%= iceCream._id %>?_method=PUT" method="POST">
     <label>Enter Image Link to Flavor:</label>
     <input type="text" name="flavorImage">
+    <input type='hidden' name="addingNewBrand" value="<%= addingNewBrand %>">
     <input type="submit" value="Add Image Link">
   </form>
 
