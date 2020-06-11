@@ -2,45 +2,51 @@
 
 <main>
 
-  <h1>Add Ice Cream</h1>
+    <% if (user) { %>
+      <h1>Add Ice Cream</h1>
+    
+      <form id="new-form" action="/" method="POST">
+        <label>Enter a Description for this Ice Cream:*</label>
+        <input type="text" name="description">
+        <label>Enter Image Link to Ice Cream:*</label>
+        <input type="text" name="image">
+        <label>Enter Link to Buy Ice Cream:*</label>
+        <input type="text" name="url">
+        <label>Select Closest Flavor (e.g. 'Cookie Dough' for 'The Tonight Dough') *</label>
+        <select name="flavor">
+          <% let listOfFlavors = [] %>
+          <% iceCreams.forEach(function(i) { %>
+            <% if (!listOfFlavors.includes(i.flavorName)) { %>
+            <option value="<%= i.flavorName %>"><%= i.flavorName %></option>
+            <% listOfFlavors.push(i.flavorName); %>
+            <% } %> 
+            <% }); %>
+          <option value="Other">Other</option>
+        </select>
+        <label>Other:</label>
+        <input type="text" name="newFlavor">
+        <label>Brand: *</label>
+        <select name="brand">
+          <% let listOfBrands = [] %>
+          <% iceCreams.forEach(function(i) { %>
+            <% if (!listOfBrands.includes(i.brandName)) { %>
+            <option value="<%= i.brandName %>"><%= i.brandName %></option>
+            <% listOfBrands.push(i.brandName); %>
+            <% } %> 
+            <% }); %>
+          <option value="Other">Other</option>
+        </select>
+        <label>Other:</label>
+        <input type="text" name="newBrand">
+        <label>Name (if different from flavor): </label>
+        <input type="text" name="name">
+        <input type="submit" value="Add Ice Cream">
+      </form>
 
-  <form id="new-form" action="/" method="POST">
-    <label>Enter a Description for this Ice Cream:*</label>
-    <input type="text" name="description">
-    <label>Enter Image Link to Ice Cream:*</label>
-    <input type="text" name="image">
-    <label>Enter Link to Buy Ice Cream:*</label>
-    <input type="text" name="url">
-    <label>Select Closest Flavor (e.g. 'Cookie Dough' for 'The Tonight Dough') *</label>
-    <select name="flavor">
-      <% let listOfFlavors = [] %>
-      <% iceCreams.forEach(function(i) { %>
-        <% if (!listOfFlavors.includes(i.flavorName)) { %>
-        <option value="<%= i.flavorName %>"><%= i.flavorName %></option>
-        <% listOfFlavors.push(i.flavorName); %>
-        <% } %> 
-        <% }); %>
-      <option value="Other">Other</option>
-    </select>
-    <label>Other:</label>
-    <input type="text" name="newFlavor">
-    <label>Brand: *</label>
-    <select name="brand">
-      <% let listOfBrands = [] %>
-      <% iceCreams.forEach(function(i) { %>
-        <% if (!listOfBrands.includes(i.brandName)) { %>
-        <option value="<%= i.brandName %>"><%= i.brandName %></option>
-        <% listOfBrands.push(i.brandName); %>
-        <% } %> 
-        <% }); %>
-      <option value="Other">Other</option>
-    </select>
-    <label>Other:</label>
-    <input type="text" name="newBrand">
-    <label>Name (if different from flavor): </label>
-    <input type="text" name="name">
-    <input type="submit" value="Add Ice Cream">
-  </form>
-
+      <% } else { %>
+        <div id='selector-flex' class='pls-login'>
+          <a href="/auth/google">Login to Add Ice Cream</a>
+        </div>
+      <% } %>
 
 </main>

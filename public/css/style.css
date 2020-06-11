@@ -19,6 +19,14 @@
     margin: 0;
     background-color: aliceblue;
   }
+  
+  main {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      min-height: 80vh;
+  }
 
   nav a {
       align-self: center;
@@ -61,12 +69,6 @@
       background: rgba(50,50,50, 0.3);
   }
 
-  main {
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
-      align-items: center;
-  }
 
   .main-selector, .flavor-selector {
       position: relative;
@@ -94,13 +96,13 @@
   }
 
   .flavor-selector {
-    font-family: 'Acme', sans-serif;
+    font-family: 'Bangers', cursive;
     height: 25vh;
     width: 350px;
     color: rgb(41, 40, 40);
     text-shadow: 3px 2px azure;
     margin: 20px;
-    font-size: 40px;
+    font-size: 60px;
     border: 2px solid black;
   }
 
@@ -179,6 +181,59 @@
 h1 {
     font-family: 'Acme', sans-serif;
     font-size: 45px;
+}
+
+.pls-login {
+    font-size: 30px;
+}
+
+#individual-ice-cream {
+    border: 5px solid rgba(56, 168, 233);
+    border-radius: 15px;
+    margin: 5px;
+    max-width: 25vw;
+    min-height: 705px;
+    background: radial-gradient(rgb(150, 150, 150), rgba(0, 24, 92, 0.85));
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 
+  0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+    color: white;
+}
+
+#individual-ice-cream img {
+    border: 2px solid rgb(255, 200, 98);
+    border-radius: 10px;
+    margin-top: 10px;
+}
+
+#name {
+    font-family: 'Bangers', cursive;
+    font-size: 35px;
+    font-weight: 100;
+    text-shadow: 3px 2px black;
+    margin: 30px;
+}
+
+#description, #rating, #review {
+    text-align: left;
+    margin: 20px;
+}
+
+#individual-ice-cream span {
+    text-decoration: underline;
+    font-weight: 800;
+}
+
+#edit {
+    text-align: right;
+    margin-right: 20px;
+}
+
+#edit a {
+    color: rgb(199, 120, 241)
+}
+
+#addReviewBtn {
+    margin-bottom: 20px;
 }
 
 

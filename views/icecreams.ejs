@@ -2,17 +2,48 @@
 
 <h1>Ice Cream Comparison</h1>
 
-
+<div id='selector-flex'>
 <% iceCreams.forEach(function(i) { %>
-<a href="<%= i.url %>" target="_blank">
-  <div class='ice-cream'>
-    <img src='<%= i.image %>'>
+  <div id='individual-ice-cream'>
+    <p id='edit'><a href="">Edit</a></p>
+    <a href="<%= i.url %>" target="_blank">
+      <div class='ice-cream'>
+        <img src='<%= i.image %>'>
+      </div>
+    </a>
+    <p id='name'><%= i.name %></p>
+    <p id='description'><span>Description:</span> <%= i.description %></p>
+    <p id='rating'><span>Rating:</span>  
+      <% if (i.reviews.length) { %>
+        <!--First let's set up a total variable -->
+        <% let total = 0 %>  
+        <% i.reviews.forEach(function(r) { %>
+          <!-- We'll aggregate the total ratings -->
+          <% total += r.rating %>
+        <% }) %>
+        <%= (total / i.reviews.length).toFixed(0) %>
+      <% } else { %>
+          <% let placeholder="No Ratings Yet" %>
+          <%= placeholder %>
+      <% } %>
+
+    </p>
+    <button>Add Rating</button>
+    <p id='review'><span>Reviews:</span>  
+      <% if (i.reviews.length) { %>
+        <% i.reviews.forEach(function(r) { %>
+          <!-- We'll aggregate the total ratings -->
+          <%= i.reviews.content %>
+        <% }) %>
+      <% } else { %>
+        <% let placeholder="No Reviews Yet" %>
+          <%= placeholder %>
+      <% } %>
+    </p>
+    <button id="addReviewBtn">Add Review</button>
   </div>
-</a>
-<p><%= i.name %></p>
-<p>Description: <span> <%= i.description %></span></p>
-<p>Rating: <span> <%= i.rating %></span></p>
 <% }); %>
+</div>
 
 </body>
 
