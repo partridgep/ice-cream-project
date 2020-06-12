@@ -28,15 +28,20 @@
       <% } %>
 
     </p>
-    <p id='user-rating'><span>My Rating:</span>
-    <form id="rating-form" action="/:id/rating" method="POST">
 
-      <button class="start type="submit" name="rating"><i class="material-icons left">star</i></button>
-      <button class="start type="submit" name="rating"><i class="material-icons left">star</i></button>
-      <button class="start type="submit" name="rating"><i class="material-icons left">star</i></button>
-      <button class="start type="submit" name="rating"><i class="material-icons left">star</i></button>
-      <button class="start type="submit" name="rating"><i class="material-icons left">star</i></button>
-    </form>
+    <!-- If logged in, add ability to add star rating -->
+    <% if (user) { %>
+      <p id='user-rating'><span>My Rating:</span>
+        <form id="rating-form" action="/reviews/:id/rating" method="POST">
+    
+          <button class="start type="submit" name="rating"><i class="material-icons left">star</i></button>
+          <button class="start type="submit" name="rating"><i class="material-icons left">star</i></button>
+          <button class="start type="submit" name="rating"><i class="material-icons left">star</i></button>
+          <button class="start type="submit" name="rating"><i class="material-icons left">star</i></button>
+          <button class="start type="submit" name="rating"><i class="material-icons left">star</i></button>
+        </form>
+      <% } %>
+
     <p id='review'><span>Reviews:</span>
       <% if (i.reviews.length) { %>
       <% i.reviews.forEach(function(r) { %>
