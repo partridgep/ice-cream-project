@@ -13,20 +13,29 @@
     </a>
     <p id='name'><%= i.name %></p>
     <p id='description'><span>Description:</span> <%= i.description %></p>
-    <p id='rating'><span>Rating:</span>
-      <% if (i.reviews.length) { %>
-      <!--First let's set up a total variable -->
-      <% let total = 0 %>
-      <% i.reviews.forEach(function(r) { %>
-      <!-- We'll aggregate the total ratings -->
-      <% total += r.rating %>
-      <% }) %>
-      <%= (total / i.reviews.length).toFixed(1) %>
-      <% } else { %>
-      <% let placeholder="No Ratings Yet" %>
-      <%= placeholder %>
-      <% } %>
-    </p>
+    <!--check if any ratings exist -->
+    <% if (i.reviews.length) { %>
+    <!--First let's set up a total variable -->
+    <% let total = 0 %>
+    <% i.reviews.forEach(function(r) { %>
+    <!-- We'll aggregate the total ratings -->
+    <% total += r.rating %>
+    <% }) %>
+    <% let avgRating = (total / i.reviews.length).toFixed(1) %>
+    <div id='avg-rating'>
+      <!-- create five stars in descending order -->
+      <% for(j=5; j>0; j--) { %>
+        <!-- only color them yellow if their value is less than or equal to user's rating -->
+        <% if (j > avgRating) { %>
+          <p value="<%= j %>"><i class="material-icons left">star</i></p>
+        <% } else { %>
+        <p value="<%= j %>"><i class="material-icons left filled">star</i></p>
+      <% }} %>
+      <p id='rating'><span>Average Rating:</span>
+    </div>
+    <% } else { %>
+    <p id='rating'><span>Average Rating:</span> No Ratings Yet</p>
+    <% } %>
 
     <!-- If logged in, add ability to add star rating -->
     <% if (user) { %>
@@ -41,7 +50,7 @@
           <!-- display rating system with user rating already showing -->
           <p id='user-rating'><span>My Rating:</span>
           <!-- this is PUT form as it will update the user's existing rating -->
-          <form id="rating-form" action="/reviews/<%= i._id %>/rating" method="PUT">
+          <form id="rating-form" action="/reviews/<%= i._id %>/rating?_method=PUT" method="POST">
             <input type="hidden" name="reviewedBy" value="<%= user._id %>">
             <!-- create five stars in descending order -->
             <% for(j=5; j>0; j--) { %>
@@ -62,7 +71,7 @@
       <% if (reviewed === false) { %>
         <!-- display rating system -->
         <p id='user-rating'><span>My Rating:</span>
-        <!-- this is PUT form as it will CREATE a user rating-->
+        <!-- this is POST form as it will CREATE a user rating-->
         <form id="rating-form" action="/reviews/<%= i._id %>/rating" method="POST">
           <input type="hidden" name="reviewedBy" value="<%= user._id %>">
           <!-- create five stars in descending order -->
@@ -78,11 +87,14 @@
     <p id='review'><span>Reviews:</span>
       <% if (i.reviews.length) { %>
       <% i.reviews.forEach(function(r) { %>
-      <%= i.reviews.content %>
+        <% if (r.content) { %>
+          <%= r.content %>
+        <% } else { %>
+          <%= "No Reviews Yet" %>
+        <% } %>
       <% }) %>
       <% } else { %>
-      <% let placeholder="No Reviews Yet" %>
-      <%= placeholder %>
+      <%= "No Reviews Yet" %>
       <% } %>
     </p>
     <button id="addReviewBtn">Add Review</button>

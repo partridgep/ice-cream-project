@@ -6,9 +6,6 @@ const indexCtrl = require('../controllers/index');
 // GET /new
 router.get('/new', indexCtrl.new);
 
-// POST /:id/rating
-router.post('/', indexCtrl.create);
-
 // POST /
 router.post('/', indexCtrl.create);
 

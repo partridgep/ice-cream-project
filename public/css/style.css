@@ -232,9 +232,22 @@ h1 {
     margin-bottom: 20px;
 }
 
-#rating-form {
+#rating-form, #avg-rating {
     display: flex;
     flex-direction: row-reverse;
+}
+
+#avg-rating {
+    justify-content: flex-end;
+}
+
+#avg-rating i:not(.filled) {
+    color: transparent;
+    -webkit-text-stroke: 1px rgb(0, 0, 0, 0.3);
+
+}
+
+#rating-form {
     justify-content: center;
 }
 

@@ -15,7 +15,7 @@ function show(req, res) {
   //in case user wants to modify to any of those
   IceCream.find({}, function (err, allIceCreams) {
     //then locate the ice cream to be updated
-    IceCream.findOne({ _id: req.params.id }, req.user, allIceCreams, function (err, iceCream) {
+    IceCream.findOne({ _id: req.params.id }, function (err, iceCream) {
       //render edit page
       res.render('updateOne', {
         iceCream,
@@ -29,7 +29,7 @@ function show(req, res) {
 // function that gets called when user hits submit button on updating particular ice cream
 function update(req, res) {
   //locate ice cram in question
-  IceCream.findOneAndUpdate({ _id: req.params.id }, req.body, function (err, iceCream) {
+  IceCream.findOneAndUpdate({ _id: req.params.id }, function (err, iceCream) {
 
     //first, check if the flavor image has been changed
     if (iceCream.flavorImage !== req.body.flavorImage) {
