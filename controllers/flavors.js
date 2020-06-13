@@ -13,7 +13,7 @@ module.exports = {
 // function that gets called when user selects a flavor
 function show(req, res) {
   // query all ice creams of the same flavor
-  IceCream.find({ flavorName: req.params.flavorName }, function (err, iceCreams) {
+  IceCream.find({ flavorName: req.params.flavorName }).populate("reviews.reviewedBy").exec( function (err, iceCreams) {
     // render view for that flavor
     res.render('icecreams', {
       iceCreams,

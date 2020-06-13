@@ -45,8 +45,11 @@
       <% let reviewed = false %>
       <!-- loop through ice cream's reviews -->
       <% for (r of i.reviews) { %>
+        <% console.log(r.reviewedBy._id) %>
+        <% console.log(user._id) %>
         <!-- check is user has rated this ice cream -->
-        <% if (r.reviewedBy.toString() == user._id.toString()) { %>
+        <% if (r.reviewedBy._id == user._id.toString()) { %>
+          <% console.log("user has reviewed this ice cream") %>
           <!-- display rating system with user rating already showing -->
           <p id='user-rating'><span>My Rating:</span>
           <!-- this is PUT form as it will update the user's existing rating -->
@@ -84,11 +87,19 @@
 
 
 
-    <p id='review'><span>Reviews:</span>
+    <p id='review'><span>Reviews:</span></p>
       <% if (i.reviews.length) { %>
       <% i.reviews.forEach(function(r) { %>
         <% if (r.content) { %>
-          <%= r.content %>
+          <div id="selector-flex">
+            <div id="review-box">
+
+            <img src="<%= r.reviewedBy.avatarURL%>">
+            <p id="reviewer-name"><%= r.reviewedBy.name%></p>
+            <p><%= r.content %></p>
+
+            </div>
+          </div>
         <% } else { %>
           <%= "No Reviews Yet" %>
         <% } %>
@@ -96,8 +107,19 @@
       <% } else { %>
       <%= "No Reviews Yet" %>
       <% } %>
-    </p>
-    <button id="addReviewBtn">Add Review</button>
+    
+
+    <% if (user) { %>
+      <form action="/reviews/<%= i._id %>" method="POST">
+        <textarea rows="3" cols="48" name="content" placeholder="Add rating before writing review"></textarea>
+        <input type="hidden" name="reviewedBy" value="<%= user._id %>">
+        <input type="submit" id="addReviewBtn" value="Add Review">
+      </form>
+    <% } else { %>
+      <form action="/auth/google" method="GET">
+        <button type="submit" id="addReviewBtn">Login to Add Review</button>
+      </form>
+    <% } %>
   </div>
   <% }); %>
 </div>

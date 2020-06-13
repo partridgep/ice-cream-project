@@ -198,7 +198,9 @@ h1 {
 #individual-ice-cream img {
     border: 2px solid rgb(255, 200, 98);
     border-radius: 10px;
-    margin-top: 10px;
+    margin: 10px 0;
+    max-width: 90%;
+    object-fit: cover;
 }
 
 #name {
@@ -229,7 +231,7 @@ h1 {
 }
 
 #addReviewBtn {
-    margin-bottom: 20px;
+    margin: 20px;
 }
 
 #rating-form, #avg-rating {
@@ -284,3 +286,37 @@ button:hover i, button:hover ~ button i{
 #rating-form:hover > button:hover .filled, #rating-form:hover > button:hover ~ button .filled{
     color: gold;
 }
+
+textarea {
+    background-color: rgba(255, 255, 255, 0.85);
+    text-align: left;
+}
+
+#review-box {
+    background-color: rgba(0, 0, 0, 0.19);
+    border: 2px solid rgba(0, 0, 0, 0.19);
+    width: 90%;
+    margin-bottom: 20px;
+    text-align: left;
+}
+
+#reviewer-name {
+    font-size: 19px;
+    text-decoration: underline;
+    font-weight: 800;
+    display: inline;
+    padding: 0 10px;
+}
+
+#review-box > p:not(#reviewer-name) {
+    text-align: left;
+    padding: 0 20px;
+}
+
+#review-box > img {
+    margin: 10px 0 -3 20px;
+    height: 40px;
+    border: 1px solid rgb(0, 0, 0, 0.5);
+    border-radius: 5px;
+}
+
