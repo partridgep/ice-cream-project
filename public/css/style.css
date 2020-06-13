@@ -230,27 +230,41 @@ h1 {
     color: rgb(199, 120, 241)
 }
 
+#edit-review {
+    font-size: 12px;
+    text-align: right;
+    margin: 10px 20px -23px 0;
+}
+
+#edit-review a {
+    color: grey;
+}
+
 #addReviewBtn {
     margin: 20px;
 }
 
-#rating-form, #avg-rating {
+#rating-form, #avg-rating, #reviewer-rating {
     display: flex;
     flex-direction: row-reverse;
 }
 
-#avg-rating {
+#avg-rating, #reviewer-rating {
     justify-content: flex-end;
 }
 
-#avg-rating i:not(.filled) {
+#reviewer-rating {
+    margin-left: -22px;
+}
+
+#avg-rating i:not(.filled), #reviewer-rating i:not(.filled) {
     color: transparent;
     -webkit-text-stroke: 1px rgb(0, 0, 0, 0.3);
-
 }
 
 #rating-form {
     justify-content: center;
+    margin-top: -42px;
 }
 
 #rating-form button {
@@ -290,6 +304,7 @@ button:hover i, button:hover ~ button i{
 textarea {
     background-color: rgba(255, 255, 255, 0.85);
     text-align: left;
+    margin-top: 8px;
 }
 
 #review-box {
@@ -308,9 +323,10 @@ textarea {
     padding: 0 10px;
 }
 
-#review-box > p:not(#reviewer-name) {
+#content {
     text-align: left;
     padding: 0 20px;
+    margin-top: 0;
 }
 
 #review-box > img {

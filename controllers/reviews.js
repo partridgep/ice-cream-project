@@ -4,7 +4,8 @@ const User = require('../models/user');
 module.exports = {
  addRating,
  updateRating,
- addReview
+ addReview,
+ updateReview
 };
 
 function addRating(req, res) {
@@ -30,10 +31,6 @@ function addRating(req, res) {
 };
 
 function updateRating(req, res) {
-    console.log(req.body);
-    console.log("updating rating");
-    console.log(req.body.rating);
-    console.log(req.body.reviewedBy);
     IceCream.findById(req.params.id, function(err, iceCream) {
         for (review of iceCream.reviews) {
             if (review.reviewedBy.toString() === req.user.id.toString()) {
@@ -67,6 +64,26 @@ function addReview(req, res) {
             iceCream.save(function(err) {
             // redirect the user
             res.redirect(`/flavors/${iceCream.flavorName}`);
+        });
+    });
+};
+
+function updateReview(req, res) {
+    console.log("updating review");
+    console.log(req.body);
+    console.log(req.body.content);
+    IceCream.findById(req.params.id, function(err, iceCream) {
+        for (review of iceCream.reviews) {
+            if (review.reviewedBy.toString() === req.user.id.toString()) {
+                console.log(`found ${req.user.name}'s review!`);
+                review.content = req.body.content;
+                break;
+            };
+        };
+        // save the ice cream
+        iceCream.save(function(err) {
+        // redirect the user
+        res.redirect(`/flavors/${iceCream.flavorName}`);
         });
     });
 };

@@ -5,6 +5,10 @@
 <div id='selector-flex'>
   <% iceCreams.forEach(function(i) { %>
   <div id='individual-ice-cream'>
+    <!-- set rated boolean to false -->
+    <% let rated = false %>
+    <!-- set reviewed boolean to false -->
+    <% let reviewed = false %>
     <p id='edit'><a href="/iceCreams/<%= i._id %>">Edit</a></p>
     <a href="<%= i.url %>" target="_blank">
       <div class='ice-cream'>
@@ -39,17 +43,11 @@
 
     <!-- If logged in, add ability to add star rating -->
     <% if (user) { %>
-
       <!-- display user's rating if it already exists -->
-      <!-- set reviewed boolean to false -->
-      <% let reviewed = false %>
       <!-- loop through ice cream's reviews -->
       <% for (r of i.reviews) { %>
-        <% console.log(r.reviewedBy._id) %>
-        <% console.log(user._id) %>
         <!-- check is user has rated this ice cream -->
         <% if (r.reviewedBy._id == user._id.toString()) { %>
-          <% console.log("user has reviewed this ice cream") %>
           <!-- display rating system with user rating already showing -->
           <p id='user-rating'><span>My Rating:</span>
           <!-- this is PUT form as it will update the user's existing rating -->
@@ -65,13 +63,13 @@
             <% }} %>
           </form>
           <!-- set reviewed boolean to true and break out of function (no need to keep looping through reviews) -->
-          <% reviewed = true; %>
+          <% rated = true; %>
           <% break %>
         <% }; %>
       <% }; %>
 
       <!-- if user has not reviewed this ice cream -->
-      <% if (reviewed === false) { %>
+      <% if (rated === false) { %>
         <!-- display rating system -->
         <p id='user-rating'><span>My Rating:</span>
         <!-- this is POST form as it will CREATE a user rating-->
@@ -85,19 +83,29 @@
       <% }; %>
     <% }; %>
 
-
-
     <p id='review'><span>Reviews:</span></p>
       <% if (i.reviews.length) { %>
       <% i.reviews.forEach(function(r) { %>
         <% if (r.content) { %>
           <div id="selector-flex">
-            <div id="review-box">
-
-            <img src="<%= r.reviewedBy.avatarURL%>">
-            <p id="reviewer-name"><%= r.reviewedBy.name%></p>
-            <p><%= r.content %></p>
-
+            <div id="review-box" value="<%= i._id %>">
+              <% if (user && r.reviewedBy.name === user.name) { %>
+                <p id='edit-review'><a href="">Edit</a></p>
+                <% reviewed = true %>
+              <% } %>
+              <img src="<%= r.reviewedBy.avatarURL%>">
+              <p id="reviewer-name"><%= r.reviewedBy.name%></p>
+              <div id='reviewer-rating'>
+                <% for(j=5; j>0; j--) { %>
+                  <% if (j > r.rating) { %>
+                    <p value="<%= j %>"><i class="material-icons left">star</i></p>
+                  <% } else { %>
+                  <p value="<%= j %>"><i class="material-icons left filled">star</i></p>
+                <% }} %>
+                <p id='rating'>
+              </div>
+              <p id="content"><%= r.content %></p>
+              <% if (user && r.reviewedBy.name === user.name) reviewed = true %>
             </div>
           </div>
         <% } else { %>
@@ -108,13 +116,20 @@
       <%= "No Reviews Yet" %>
       <% } %>
     
-
     <% if (user) { %>
+      <form action="/reviews/<%= i._id %>/update?_method=PUT" method="POST">
+        <textarea name="content" rows="3" cols="48"></textarea>
+        <input type="hidden" name="reviewedBy" value="<%= user._id %>">
+        <input type="submit" id="addReviewBtn" value="Update Review">
+      </form>
+
+      <% if (!reviewed) { %>
       <form action="/reviews/<%= i._id %>" method="POST">
-        <textarea rows="3" cols="48" name="content" placeholder="Add rating before writing review"></textarea>
+        <textarea name="content" rows="3" cols="48" placeholder="Add rating before writing review"></textarea>
         <input type="hidden" name="reviewedBy" value="<%= user._id %>">
         <input type="submit" id="addReviewBtn" value="Add Review">
       </form>
+      <% } %>
     <% } else { %>
       <form action="/auth/google" method="GET">
         <button type="submit" id="addReviewBtn">Login to Add Review</button>
