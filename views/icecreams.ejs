@@ -90,7 +90,7 @@
           <div id="selector-flex">
             <div id="review-box" value="<%= i._id %>">
               <% if (user && r.reviewedBy.name === user.name) { %>
-                <p id='edit-review'><a href="">Edit</a></p>
+                <p id='edit-review'><a href="">Edit</a> - <a href="">X</a></p>
                 <% reviewed = true %>
               <% } %>
               <img src="<%= r.reviewedBy.avatarURL%>">
@@ -117,12 +117,6 @@
       <% } %>
     
     <% if (user) { %>
-      <form action="/reviews/<%= i._id %>/update?_method=PUT" method="POST">
-        <textarea name="content" rows="3" cols="48"></textarea>
-        <input type="hidden" name="reviewedBy" value="<%= user._id %>">
-        <input type="submit" id="addReviewBtn" value="Update Review">
-      </form>
-
       <% if (!reviewed) { %>
       <form action="/reviews/<%= i._id %>" method="POST">
         <textarea name="content" rows="3" cols="48" placeholder="Add rating before writing review"></textarea>

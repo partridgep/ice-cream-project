@@ -50,8 +50,8 @@ app.use(passport.session());
 app.use('/', indexRouter);
 app.use('/flavors', flavorsRouter);
 app.use('/brands', brandsRouter);
-app.use('/:id', iceCreamRouter);
 app.use('/reviews', reviewsRouter);
+app.use('/:id', iceCreamRouter);
 
 // Tell App to listen
 app.listen(port, function() {
