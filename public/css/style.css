@@ -259,3 +259,7 @@ button i {
 button:hover i, button:hover ~ button i{
     color: gold;
 }
+
+.filled {
+    color: gold;
+}

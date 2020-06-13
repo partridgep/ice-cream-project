@@ -21,31 +21,64 @@
       <!-- We'll aggregate the total ratings -->
       <% total += r.rating %>
       <% }) %>
-      <%= (total / i.reviews.length).toFixed(0) %>
+      <%= (total / i.reviews.length).toFixed(1) %>
       <% } else { %>
       <% let placeholder="No Ratings Yet" %>
       <%= placeholder %>
       <% } %>
-
     </p>
 
     <!-- If logged in, add ability to add star rating -->
     <% if (user) { %>
-      <p id='user-rating'><span>My Rating:</span>
-        <form id="rating-form" action="/reviews/:id/rating" method="POST">
-    
-          <button class="start type="submit" name="rating"><i class="material-icons left">star</i></button>
-          <button class="start type="submit" name="rating"><i class="material-icons left">star</i></button>
-          <button class="start type="submit" name="rating"><i class="material-icons left">star</i></button>
-          <button class="start type="submit" name="rating"><i class="material-icons left">star</i></button>
-          <button class="start type="submit" name="rating"><i class="material-icons left">star</i></button>
+
+      <!-- display user's rating if it already exists -->
+      <!-- set reviewed boolean to false -->
+      <% let reviewed = false %>
+      <!-- loop through ice cream's reviews -->
+      <% for (r of i.reviews) { %>
+        <!-- check is user has rated this ice cream -->
+        <% if (r.reviewedBy.toString() == user._id.toString()) { %>
+          <!-- display rating system with user rating already showing -->
+          <p id='user-rating'><span>My Rating:</span>
+          <!-- this is PUT form as it will update the user's existing rating -->
+          <form id="rating-form" action="/reviews/<%= i._id %>/rating" method="PUT">
+            <input type="hidden" name="reviewedBy" value="<%= user._id %>">
+            <!-- create five stars in descending order -->
+            <% for(j=5; j>0; j--) { %>
+              <!-- only color them yellow if their value is less than or equal to user's rating -->
+              <% if (j > r.rating) { %>
+                <button type="submit" name="rating" value="<%= j %>"><i class="material-icons left">star</i></button>
+              <% } else { %>
+              <button type="submit" name="rating" value="<%= j %>"><i class="material-icons left filled">star</i></button>
+            <% }} %>
+          </form>
+          <!-- set reviewed boolean to true and break out of function (no need to keep looping through reviews) -->
+          <% reviewed = true; %>
+          <% break %>
+        <% }; %>
+      <% }; %>
+
+      <!-- if user has not reviewed this ice cream -->
+      <% if (reviewed === false) { %>
+        <!-- display rating system -->
+        <p id='user-rating'><span>My Rating:</span>
+        <!-- this is PUT form as it will CREATE a user rating-->
+        <form id="rating-form" action="/reviews/<%= i._id %>/rating" method="POST">
+          <input type="hidden" name="reviewedBy" value="<%= user._id %>">
+          <!-- create five stars in descending order -->
+          <% for(j=5; j>0; j--) { %>
+              <button type="submit" name="rating" value="<%= j %>"><i class="material-icons left">star</i></button>
+            <% }; %>
         </form>
-      <% } %>
+      <% }; %>
+      
+    <% }; %>
+
+
 
     <p id='review'><span>Reviews:</span>
       <% if (i.reviews.length) { %>
       <% i.reviews.forEach(function(r) { %>
-      <!-- We'll aggregate the total ratings -->
       <%= i.reviews.content %>
       <% }) %>
       <% } else { %>
