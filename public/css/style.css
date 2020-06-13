@@ -263,3 +263,11 @@ button:hover i, button:hover ~ button i{
 .filled {
     color: gold;
 }
+
+#rating-form:hover .filled {
+    color: transparent;
+}
+
+#rating-form:hover > button:hover .filled, #rating-form:hover > button:hover ~ button .filled{
+    color: gold;
+}
