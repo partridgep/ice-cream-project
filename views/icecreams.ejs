@@ -7,9 +7,13 @@
   <div id='individual-ice-cream'>
     <!-- set rated boolean to false -->
     <% let rated = false %>
-    <!-- set reviewed boolean to false -->
+    <!-- set user-specific reviewed boolean to false -->
     <% let reviewed = false %>
-    <p id='edit'><a href="/iceCreams/<%= i._id %>">Edit</a></p>
+    <!-- set reviewed by anyone boolean to false -->
+    <% let anyReviewed = false %>
+    <% if (user) { %>
+      <p id='edit'><a href="/iceCreams/<%= i._id %>">Edit</a></p> 
+    <% } %>
     <a href="<%= i.url %>" target="_blank">
       <div class='ice-cream'>
         <img src='<%= i.image %>'>
@@ -87,10 +91,11 @@
       <% if (i.reviews.length) { %>
       <% i.reviews.forEach(function(r) { %>
         <% if (r.content) { %>
+          <% anyReviewed = true %>
           <div id="selector-flex">
             <div id="review-box" value="<%= i._id %>">
               <% if (user && r.reviewedBy.name === user.name) { %>
-                <p id='edit-review'><a href="">Edit</a> - <a href="">X</a></p>
+                <p id='edit-review'><a class="edit-link" href="">Edit</a> - <a href="">X</a></p>
                 <% reviewed = true %>
               <% } %>
               <img src="<%= r.reviewedBy.avatarURL%>">
@@ -108,11 +113,10 @@
               <% if (user && r.reviewedBy.name === user.name) reviewed = true %>
             </div>
           </div>
-        <% } else { %>
-          <%= "No Reviews Yet" %>
         <% } %>
       <% }) %>
-      <% } else { %>
+
+      <% }  if (!anyReviewed) { %>
       <%= "No Reviews Yet" %>
       <% } %>
     
