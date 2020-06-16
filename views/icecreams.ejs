@@ -87,10 +87,11 @@
       <% }; %>
     <% }; %>
 
-    <p id='review'><span>Reviews:</span></p>
+    <p id='review'><span>Reviews:</span>
       <% if (i.reviews.length) { %>
       <% i.reviews.forEach(function(r) { %>
         <% if (r.content) { %>
+        </p>
           <% anyReviewed = true %>
           <div id="selector-flex">
             <div id="review-box" value="<%= i._id %>">
@@ -117,7 +118,7 @@
       <% }) %>
 
       <% }  if (!anyReviewed) { %>
-      <%= "No Reviews Yet" %>
+      No Reviews Yet</p>
       <% } %>
     
     <% if (user) { %>

@@ -309,6 +309,7 @@ textarea {
 }
 
 #review-box {
+    position: relative;
     background-color: rgba(0, 0, 0, 0.19);
     border: 2px solid rgba(0, 0, 0, 0.19);
     width: 90%;
@@ -335,5 +336,43 @@ textarea {
     height: 40px;
     border: 1px solid rgb(0, 0, 0, 0.5);
     border-radius: 5px;
+}
+
+#delete-review {
+    position: absolute;
+    background-color: rgba(0, 0, 0, 0.6);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    z-index: 5;
+    padding-bottom: 3px;
+}
+
+#delete-review > form {
+    margin: 0;
+    padding: 0;
+}
+
+#delete-review > button {
+    height: 20px;
+    text-align: center;
+}
+
+#just-review, #both-rs {
+    width: 200px;
+    height: 30px;
+}
+
+#just-review {
+    margin: 15px 0 9px 0;
+}
+
+#both-rs {
+    margin: 0 0 20px 0;
 }
 

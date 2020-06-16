@@ -28,9 +28,9 @@ function show(req, res) {
 
 // function that gets called when user hits submit button on updating particular ice cream
 function update(req, res) {
-  //locate ice cram in question
-  IceCream.findOneAndUpdate({ _id: req.params.id }, function (err, iceCream) {
-
+  console.log(req.body);
+  //locate ice cream in question
+  IceCream.findById(req.params.id, function (err, iceCream) {
     //first, check if the flavor image has been changed
     if (iceCream.flavorImage !== req.body.flavorImage) {
       //if the flavor image has been changed on this one, it should apply to ALL ice creams of that flavor

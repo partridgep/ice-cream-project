@@ -14,5 +14,11 @@ router.put('/:id/update', reviewsCtrl.updateReview);
 // PUT reviews/:id/rating
 router.put('/:id/rating', reviewsCtrl.updateRating);
 
+// DELETE reviews/:id
+router.delete('/:id', reviewsCtrl.deleteReview);
+
+// DELETE reviews/:id/rating
+router.delete('/:id/rating', reviewsCtrl.deleteRating);
+
 
 module.exports = router;

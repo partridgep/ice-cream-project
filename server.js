@@ -5,7 +5,7 @@ const session = require('express-session');
 const passport = require('passport');
 const port = process.env.PORT || '3000'; 
 
-// We'll need to load the env vars
+// load the env vars
 require('dotenv').config()
 
 const indexRouter = require('./routes/index');
@@ -21,7 +21,6 @@ const app = express();
 require('./config/database');
 require('./config/passport');
 
-
 // Configure the app with app.set()
 app.set('view engine', 'ejs');
 
@@ -36,13 +35,11 @@ app.use(express.static('public'));
 app.use(methodOverride('_method'));
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
-// TODO Add session middleware here
 app.use(session({
     secret: 'Cookie Dough!',
     resave: false,
     saveUninitialized: true
 }));
-// TODO Add passport middleware here
 app.use(passport.initialize());
 app.use(passport.session());
 
@@ -51,7 +48,7 @@ app.use('/', indexRouter);
 app.use('/flavors', flavorsRouter);
 app.use('/brands', brandsRouter);
 app.use('/reviews', reviewsRouter);
-app.use('/:id', iceCreamRouter);
+app.use('/iceCreams', iceCreamRouter);
 
 // Tell App to listen
 app.listen(port, function() {

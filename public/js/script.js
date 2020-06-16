@@ -1,14 +1,30 @@
 /*----- constants -----*/
-//HTML consstants for review form
-const formPart1 = `<form id="updateReview" action="/reviews/`;
+//HTML constants for review form
+const updateFormPart1 = `<form id="updateReview" action="/reviews/`;
 //in between here we will add the ice cream ID
-const formPart2 = `/update?_method=PUT" method="POST">
-<textarea rows="3" cols="48" name="content">`;
+const updateFormPart2 = `/update?_method=PUT" method="POST">
+                    <textarea rows="3" cols="48" name="content">`;
 //in between here we will add the review content
-const formPart3 = `</textarea>
-<input type="hidden" name="reviewedBy" value="<%= user._id %>">
-<button class="cancel">Cancel</button>
-<input type="submit" id="addReviewBtn" value="Update Review"></form>`;
+const updateFormPart3 = `</textarea>
+                        <input type="hidden" name="reviewedBy" value="<%= user._id %>">
+                        <button class="cancel-update">Cancel</button>
+                        <input type="submit" id="addReviewBtn" value="Update Review">
+                    </form>`;
+
+//HTML constants for delete div
+const deleteDivPart1 = `<div id="delete-review"> 
+                    <form action="/reviews/`
+//in between here we will add the ice cream ID
+const deleteDivPart2 = `?_method=DELETE" method="POST"> 
+                        <button id="just-review" type="submit">Delete Review</button> 
+                    </form>
+                    <form action="/reviews/`
+//in between here we will add the ice cream ID
+const deleteDivPart3 =`/rating?_method=DELETE" method="POST">
+                        <button id="both-rs" type="submit">Delete Rating + Review</button>
+                    </form>
+                        <button class="cancel-del">Cancel</button> 
+                </div>`;
 
 /*----- app's state (variables) -----*/
 let removedReview, $iceCreamBox;
@@ -23,16 +39,21 @@ $selector.click(handleClick);
 
 //handle click on the ice cream items
 function handleClick(e) {
-    //if click on "Edit" link on review box
-    if ($(e.target).hasClass("edit-link")) {
+    if ($(e.target).hasClass("edit-link")) { //if click on "Edit" link on review box
         showTextArea(e); //show text area for user to edit answer
-    } else if ($(e.target).hasClass("cancel")) { //if they click on cancel after wanting to edit review
-        cancel(e); //revert back
+    } else if ($(e.target).hasClass("cancel-update")) { //if click on cancel after wanting to edit review
+        cancelUpdate(e); //revert back
+    } else if($(e.target).text() === "X") { //if click on X button above review
+        deleteReview(e); //show buttons to delete review
+    } else if ($(e.target).hasClass("cancel-del")) { //if click on "Cancel" within delete div
+        $('#delete-review').remove(); //remove any delete overlays that may have been left
     };
 };
 
 function showTextArea(e) {
     e.preventDefault();
+    //remove any delete overlays that may have been left
+    $('#delete-review').remove();
     //create element reference for the review div
     let $reviewBox = $(e.target.parentElement.parentElement);
     //create elemenent reference for removed review in case user cancels and wants to add it back
@@ -46,10 +67,11 @@ function showTextArea(e) {
     //remove the review div
     $reviewBox.remove();
     //append a review form with review content as placeholder
-    $iceCreamBox.append(formPart1+iceCreamID+formPart2+content+formPart3);
+    //we interject the ice cream ID into the form
+    $iceCreamBox.append(updateFormPart1+iceCreamID+updateFormPart2+content+updateFormPart3);
 };
 
-function cancel(e) {
+function cancelUpdate(e) {
     e.preventDefault();
     //create element reference to the review update form
     let $updateForm = $(e.target.parentElement);
@@ -57,4 +79,15 @@ function cancel(e) {
     $updateForm.remove();
     //append the removed review back into view
     $iceCreamBox.append(removedReview);
+};
+
+function deleteReview(e) {
+    e.preventDefault();
+    //create element reference for the review div
+    let $reviewBoxForDel = $(e.target.parentElement.parentElement);
+    //grab ice cream object ID, which will always be the specified 24 characters
+    let iceCreamID = $reviewBoxForDel.prop('outerHTML').substring(28, 52);
+    //append div with delete forms and a cancel button
+    //we interject the ice cream ID into those forms
+    $reviewBoxForDel.append(deleteDivPart1+iceCreamID+deleteDivPart2+iceCreamID+deleteDivPart3);
 };
