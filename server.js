@@ -13,6 +13,7 @@ const flavorsRouter = require('./routes/flavors');
 const brandsRouter = require('./routes/brands');
 const iceCreamRouter = require('./routes/icecreams');
 const reviewsRouter = require('./routes/reviews');
+const usersRouter = require('./routes/users');
 
 // Set up express app
 const app = express();
@@ -49,6 +50,8 @@ app.use('/flavors', flavorsRouter);
 app.use('/brands', brandsRouter);
 app.use('/reviews', reviewsRouter);
 app.use('/iceCreams', iceCreamRouter);
+app.use('/user', usersRouter);
+
 
 // Tell App to listen
 app.listen(port, function() {
