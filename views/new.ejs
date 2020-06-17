@@ -12,7 +12,7 @@
         <input type="text" name="image">
         <label>Enter Link to Buy Ice Cream:*</label>
         <input type="text" name="url">
-        <label>Select Closest Flavor (e.g. 'Cookie Dough' for 'The Tonight Dough') *</label>
+        <label>Select Closest Flavor *:<span>(e.g. 'Chocolate' for 'Chocolate Fudge Brownie')</span></label>
         <select name="flavor">
           <% let listOfFlavors = [] %>
           <% iceCreams.forEach(function(i) { %>
@@ -50,3 +50,5 @@
       <% } %>
 
 </main>
+
+<%- include('./partials/footer') %>

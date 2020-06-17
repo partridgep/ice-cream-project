@@ -1,7 +1,8 @@
 <%- include('./partials/header') %>
 
-<h1>Flavors for <%= iceCreams[0].brandName %></h1>
+<main>
 
+<h1>Flavors for <%= iceCreams[0].brandName %></h1>
 <div id='selector-flex'>
 
   <% let listOfFlavors = [] %>
@@ -19,6 +20,6 @@
 
 </div>
 
-</body>
+</main>
 
-</html>
+<%- include('./partials/footer') %>

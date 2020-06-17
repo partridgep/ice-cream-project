@@ -23,9 +23,9 @@ nav {
 main {
     display: flex;
     flex-direction: column;
-    justify-content: center;
+    justify-content: flex-start;
     align-items: center;
-    min-height: 80vh;
+    min-height: calc(100vh - 139px);
 }
 
 nav a {
@@ -185,6 +185,13 @@ nav a:hover {
     font-size: 20px;
     padding: 5px;
     border-radius: 5px;
+}
+
+#new-form span {
+    font-size: 13px;
+    display: block;
+    color: grey;
+    text-align: right;
 }
 
 #new-form input[type="submit"] {
@@ -415,4 +422,25 @@ textarea {
     color: rgb(75,75,75);
 }
 
+footer {
+    position: relative;
+    left: 0;
+    bottom: 0;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    background-color: rgb(240, 240, 240);
+    color: black;
+    text-align: center;
+    padding: 7px;
+    z-index: 5;
+    margin-top: 25px;
+  }
 
+.social-link {
+    height: 25px;
+    width: 25px;
+    margin-left: 15px;
+}
