@@ -211,6 +211,14 @@ nav a:hover {
     flex-flow: row wrap;
 }
 
+#review-flex {
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    flex-flow: row wrap;
+    width: 800px;
+}
+
 h1 {
     font-family: 'Acme', sans-serif;
     font-size: 45px;

@@ -22,7 +22,7 @@
 <% for (iceCream of user.ratedIceCreams) { %>
     <% for (r of iceCream.reviews) { %>
         <% if (r.reviewedBy._id.toString() === user._id.toString() && r.content) { %>
-            <div id="selector-flex">
+            <div id="review-flex">
                 <div id="review-box">
                   <img src="<%= iceCream.image %>">
                   <a id="ice-cream-link" href="/flavors/<%= iceCream.flavorName %>"><p id="reviewer-name"><%= iceCream.name %></p></a>
