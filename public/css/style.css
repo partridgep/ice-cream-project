@@ -68,7 +68,7 @@ nav a:hover {
     background: rgba(50, 50, 50, 0.3);
 }
 
-.main-selector, .flavor-selector {
+.main-selector, .flavor-selector, .my-flavors {
     position: relative;
     text-align: center;
     text-transform: uppercase;
@@ -92,15 +92,25 @@ nav a:hover {
     border: 2px solid grey;
 }
 
-.flavor-selector {
+.flavor-selector, .my-flavors {
     font-family: 'Bangers', cursive;
     height: 25vh;
     width: 350px;
+    margin: 20px;
+    border: 2px solid black;
+}
+
+.flavor-selector {
     color: rgb(41, 40, 40);
     text-shadow: 3px 2px azure;
-    margin: 20px;
     font-size: 60px;
-    border: 2px solid black;
+}
+
+.my-flavors {
+    color: rgb(255, 255, 255);
+    text-shadow: 3px 2px rgb(0, 0, 0);
+    font-size: 55px;
+    -webkit-text-stroke: 2px rgb(0, 0, 0, 1);
 }
 
 .main-selector:hover {
@@ -112,24 +122,43 @@ nav a:hover {
     transition: all 0.2s;
 }
 
-.flavor-selector:hover {
-    height: 26vh;
-    color: rgb(199, 120, 241);
-    text-shadow: 3px 2px black;
-    -webkit-text-stroke: 1px rgb(0, 0, 0, 0.5);
-    font-weight: 800;
+.flavor-selector:hover, .my-flavors:hover {
     transition: all 0.2s;
     border: 3px solid black;
 }
 
-.flavor-selector:focus {
+.flavor-selector:hover {
+    height: 26vh;
+    color: rgb(199, 120, 241);
+    font-weight: 800;
+    text-shadow: 3px 2px black;
+    -webkit-text-stroke: 1px rgb(0, 0, 0, 0.5);
+}
+
+.my-flavors:hover {
+    height: 25.5vh;
+    color: rgb(255, 187, 0);
+    font-size: 56px;
+    text-shadow: 4px 3px black;
+    -webkit-text-stroke: 1px rgb(0, 0, 0, 0.5);
+    font-weight: 900;
+}
+
+.flavor-selector:focus, .my-flavors:focus {
     border: 3px solid blue;
     font-weight: 800;
-    color: rgb(199, 120, 241);
     text-shadow: 3px 2px black;
 }
 
-.flavor-selector:active {
+.flavor-selector:focus {
+    color: rgb(199, 120, 241);
+}
+
+.my-flavors:focus {
+    color: rgb(255, 187, 0);
+}
+
+.flavor-selector:active, .my-flavors:active {
     border: 3px solid blue;
     text-shadow: 3px 2px black;
     color: rgb(255, 255, 255);
@@ -375,4 +404,15 @@ textarea {
 #both-rs {
     margin: 0 0 20px 0;
 }
+
+#ice-cream-link {
+    text-decoration: none;
+    color: black;
+}
+
+#ice-cream-link:hover {
+    text-decoration: none;
+    color: rgb(75,75,75);
+}
+
 

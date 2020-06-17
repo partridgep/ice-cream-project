@@ -1,3 +1,41 @@
 <%- include('./partials/header') %>
 
-<h1><%= user.name %>'s Ice Creams</h1>
+<h1>My Ice Creams</h1>
+
+<h2>My Top-Rated Ice Creams</h2>
+<div id='selector-flex'>
+<% for (iceCream of user.ratedIceCreams) { %>
+    <% for (r of iceCream.reviews) { %>
+        <% if (r.reviewedBy._id.toString() === user._id.toString() && r.rating === 5) { %>
+            <form id="flavor-form" action="/flavors/<%= iceCream.flavorName %>" method="GET">
+                <button class='my-flavors' type='submit' value='<%= iceCream.flavorName %>' name='flavorName' style="background-image: url('<%= iceCream.image %>')"><%= iceCream.name %></button>
+              </form>
+
+      <% } %>
+    <% } %>
+<% } %>
+</div>
+
+<h2>My Reviews</h2>
+<% for (iceCream of user.ratedIceCreams) { %>
+    <% for (r of iceCream.reviews) { %>
+        <% if (r.reviewedBy._id.toString() === user._id.toString() && r.content) { %>
+            <div id="selector-flex">
+                <div id="review-box">
+                  <img src="<%= iceCream.image %>">
+                  <a id="ice-cream-link" href="/flavors/<%= iceCream.flavorName %>"><p id="reviewer-name"><%= iceCream.name %></p></a>
+                  <div id='reviewer-rating'>
+                    <% for(j=5; j>0; j--) { %>
+                      <% if (j > r.rating) { %>
+                        <p value="<%= j %>"><i class="material-icons left">star</i></p>
+                      <% } else { %>
+                      <p value="<%= j %>"><i class="material-icons left filled">star</i></p>
+                    <% }} %>
+                    <p id='rating'>
+                        <% } %>
+                        <% } %>
+                    </div>
+                    <p id="content"><%= r.content %></p>
+                </div>
+      </div>
+<% } %>
