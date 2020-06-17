@@ -122,6 +122,15 @@ nav a:hover {
     transition: all 0.2s;
 }
 
+.main-selector:focus {
+    border: 3px solid purple;
+    color: rgb(255, 200, 98);
+}
+
+.main-selector:active {
+    color: azure;
+}
+
 .flavor-selector:hover, .my-flavors:hover {
     transition: all 0.2s;
     border: 3px solid black;
@@ -211,6 +220,16 @@ nav a:hover {
     flex-flow: row wrap;
 }
 
+#ice-cream-flex {
+    display: flex;
+    justify-content: flex-start;
+    align-items: flex-start;
+    max-width: 100vw;
+    overflow-x: auto;
+    flex-flow: nowrap;
+    -webkit-overflow-scrolling: touch;
+}
+
 #review-flex {
     display: flex;
     justify-content: center;
@@ -225,6 +244,9 @@ h1 {
 }
 
 .pls-login {
+    display: flex;
+    justify-content: center;
+    align-items: center;
     font-size: 30px;
 }
 
@@ -237,6 +259,7 @@ h1 {
     background: radial-gradient(rgb(150, 150, 150), rgba(0, 24, 92, 0.85));
     box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
     color: white;
+    flex: 0 0 auto;
 }
 
 #individual-ice-cream img {
@@ -350,6 +373,7 @@ textarea {
     background-color: rgba(255, 255, 255, 0.85);
     text-align: left;
     margin-top: 8px;
+    font-size: 13px;
 }
 
 #review-box {
@@ -451,4 +475,133 @@ footer {
     height: 25px;
     width: 25px;
     margin-left: 15px;
+}
+
+@media (max-width: 600px) {
+
+    nav {
+        font-size: 13px;
+    }
+
+    #user_nav {
+        text-align: right;
+        width: 80%;
+    }
+
+    nav a {
+        align-self: right;
+        padding: 18px 2px 16px 2px;
+    }
+
+    .user_photo {
+        margin-left: -29px;
+        margin-top: 0px;
+        width: 27px;
+        height: 27px;
+        border-radius: 8px;
+    }
+
+    #user-ice-creams {
+        padding-left: 30px;
+    }
+
+    h1 {
+        font-size: 40px;
+    }
+
+    .main-selector {
+        width: 85vw;
+        height: 250px;
+        font-size: 80px;
+    }
+
+    .flavor-selector, .my-flavors {
+        height: 25vh;
+        width: 325px;
+        margin: 7px;
+    }
+
+    #individual-ice-cream {
+        width: 350px;
+        min-height: 600px;
+    }
+
+    .ice-cream {
+        height: 35vh;
+    }
+    
+    .ice-cream>img {
+        height: 35vh;
+    }
+
+    #rating-form {
+        margin-left: 50px;
+    }
+
+    #rating-form button {
+        background: none;
+        border: none;
+        outline: none;
+    }
+
+    textarea {
+        width: 80vw;
+    }
+
+    .my-flavors {
+        font-size: 45px;
+    }
+
+    #review-flex {
+        width: 97vw;
+    }
+
+    #ice-cream-link > #reviewer-name {
+        font-size: 15px;
+    }
+
+}
+
+@media (max-width: 370px) {
+
+    h1 {
+        font-size: 30px;
+    }
+
+    nav {
+        font-size: 12px;
+    }
+
+    #user_nav {
+        text-align: right;
+        width: 90%;
+    }
+
+    .user_photo {
+        margin-left: -29px;
+        margin-top: 3px;
+        width: 20px;
+        height: 20px;
+        border-radius: 5px;
+    }
+
+    .main-selector {
+        height: 200px;
+    }
+
+    .flavor-selector, .my-flavors {
+        height: 30vh;
+        width: 270px;
+        margin: 7px;
+    }
+
+    #individual-ice-cream {
+        width: 300px;
+        min-height: 600px;
+    }
+
+    #rating-form {
+        margin-left: 80px;
+    }
+
 }
