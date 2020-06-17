@@ -1,8 +1,9 @@
 <%- include('./partials/header') %>
 
+<% if (user) { %>
+
 <main>
 
-    <% if (user) { %>
       <h1>Add Ice Cream</h1>
     
       <form id="new-form" action="/" method="POST">
@@ -43,12 +44,15 @@
         <input type="submit" value="Add Ice Cream">
       </form>
 
-      <% } else { %>
-        <div id='selector-flex' class='pls-login'>
-          <a href="/auth/google">Login to Add Ice Cream</a>
-        </div>
-      <% } %>
-
-</main>
+      
+    </main>
+    
+<% } else { %>
+  <div class='main-cntr'>
+    <div class='pls-login'>
+      <a href="/auth/google">Login to Add Ice Cream</a>
+    </div>
+  </div>
+<% } %>
 
 <%- include('./partials/footer') %>

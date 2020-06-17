@@ -20,12 +20,19 @@ nav {
     background-color: aliceblue;
 }
 
-main {
+main, .main-cntr {
     display: flex;
     flex-direction: column;
-    justify-content: flex-start;
     align-items: center;
     min-height: calc(100vh - 139px);
+}
+
+main {
+    justify-content: flex-start;
+}
+
+.main-cntr {
+    justify-content: center;
 }
 
 nav a {

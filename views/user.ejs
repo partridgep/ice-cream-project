@@ -1,6 +1,9 @@
 <%- include('./partials/header') %>
 
+<% if (user) { %>
+
 <main>
+
 
 <h1>My Ice Creams</h1>
 
@@ -42,6 +45,16 @@
       </div>
 <% } %>
 
+
 </main>
+
+<% } else { %>
+
+  <div class='main-cntr'>
+    <div class='pls-login'>
+      <a href="/auth/google">Login to view your ice creams</a>
+    </div>
+  </div>
+<% } %>
 
 <%- include('./partials/footer') %>
