@@ -22,10 +22,18 @@ router.get('/auth/google', passport.authenticate(
 router.get('/oauth2callback', passport.authenticate(
     'google',
     {
-      successRedirect : '/',
+      successReturnToOrRedirect: '/login',
       failureRedirect : '/'
     }
   ));
+
+router.get('/login', function(req, res) {
+  if (req.referer === 'http://localhost:3000/') {
+    res.redirect('/');
+  } else {
+    res.redirect(req.referer);
+  };
+})
 
 // OAuth logout route
 router.get('/logout', function(req, res){
