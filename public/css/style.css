@@ -97,6 +97,7 @@ nav a:hover {
     margin: 10px;
     font-size: 100px;
     border: 2px solid grey;
+    padding: 0;
 }
 
 .flavor-selector, .my-flavors {
