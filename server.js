@@ -27,7 +27,6 @@ app.set('view engine', 'ejs');
 
 // Mount middleware with app.use()
 app.use(function(req, res, next) {
-    //console.log(req)
     //attach property to request object
     console.log(`Referer: ${req.get('referer')}`);
     req.referer = req.get('referer');

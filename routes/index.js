@@ -28,12 +28,12 @@ router.get('/oauth2callback', passport.authenticate(
   ));
 
 router.get('/login', function(req, res) {
-  if (req.referer === 'http://localhost:3000/') {
+  if (req.referer === 'http://localhost:3000/' || req.referer === 'https://seir-ice-creams.herokuapp.com/') {
     res.redirect('/');
   } else {
     res.redirect(req.referer);
   };
-})
+}) 
 
 // OAuth logout route
 router.get('/logout', function(req, res){

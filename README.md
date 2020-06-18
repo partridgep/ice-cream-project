@@ -3,7 +3,7 @@ A web app that lets you pick and compare your ice cream based on either flavor o
 
 
 ## Getting Started
-[Click Here](https://seir-ice-creams.herokuapp.com/) to get started.
+[Click Here](https://seir-ice-creams.herokuapp.com/) to get started (please allow 
 
 ## Technologies Used
 * HTML
@@ -54,6 +54,7 @@ A web app that lets you pick and compare your ice cream based on either flavor o
 *Ice Cream Comparison Page:*
 
 ![image](https://i.imgur.com/1xFY7f1.png)
+
 
 # Functioning
 
