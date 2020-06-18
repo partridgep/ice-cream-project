@@ -567,6 +567,33 @@ footer {
         font-size: 15px;
     }
 
+    #new-form {
+        display: grid;
+        grid-gap: 7px;
+        grid-template-columns: repeat(2, minmax(auto, 20rem));
+        margin-right: 2px;
+    }
+    
+    #new-form * {
+        font-size: 15px;
+        padding: 5px;
+        border-radius: 5px;
+    }
+    
+    #new-form span {
+        font-size: 14px;
+    }
+    
+    #new-form input[type="submit"] {
+        grid-column: span 2;
+        width: 10rem;
+        margin-left: auto;
+    }
+    
+    #new-form label {
+        text-align: right;
+    }
+
 }
 
 @media (max-width: 370px) {
