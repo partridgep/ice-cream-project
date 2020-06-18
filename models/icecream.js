@@ -22,7 +22,7 @@ const reviewSchema = new Schema({
 const iceCreamSchema = new Schema({
     name: {
         type: String,
-        //unique: true
+        unique: true
     },
     flavorName: {
         type: String,
