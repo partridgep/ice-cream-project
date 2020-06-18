@@ -42,9 +42,7 @@ function update(req, res) {
     iceCream.flavorImage = req.body.flavorImage;
     //save info
     iceCream.save(function (err) {
-      if (err) {
-        console.log(err);
-      };
+      if (err) {console.log(err)};
       // next, check if user has entered new brand as well
       if (req.body.addingNewBrand === 'true') {
         //if so, redirect user to New Brand page

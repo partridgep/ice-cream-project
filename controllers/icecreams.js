@@ -28,7 +28,6 @@ function show(req, res) {
 
 // function that gets called when user hits submit button on updating particular ice cream
 function update(req, res) {
-  console.log(req.body);
   //locate ice cream in question
   IceCream.findById(req.params.id, function (err, iceCream) {
     //first, check if the flavor image has been changed
@@ -68,9 +67,7 @@ function update(req, res) {
     else iceCream.Brand = req.body.brand;
     //save data
     iceCream.save(function (err) {
-      if (err) {
-        console.log(err);
-      };
+      if (err) {console.log(err)};
       //redirect to page of ice creams of same flavor
       IceCream.find({ flavorName: iceCream.flavorName }, function (err, iceCreams) {
         res.render('icecreams', {

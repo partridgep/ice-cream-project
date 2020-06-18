@@ -39,7 +39,6 @@ $selector.click(handleClick);
 
 //handle click on the ice cream items
 function handleClick(e) {
-    console.log(e.target);
     if ($(e.target).hasClass("edit-link")) { //if click on "Edit" link on review box
         showTextArea(e); //show text area for user to edit answer
     } else if ($(e.target).hasClass("cancel-update")) { //if click on cancel after wanting to edit review

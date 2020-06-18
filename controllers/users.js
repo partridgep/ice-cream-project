@@ -7,7 +7,6 @@ module.exports = {
 
 // function that gets called when clicking on user in nav bar
 function show(req, res) {
-    console.log(req.user);
     // render homepage
     if (req.user) {
         User.findById(req.user._id).populate('ratedIceCreams').exec(function(err, me) {

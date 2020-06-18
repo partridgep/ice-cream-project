@@ -42,9 +42,7 @@ function update(req, res) {
     iceCream.brandImage = req.body.brandImage;
     // save info
     iceCream.save(function (err) {
-      if (err) {
-        console.log(err);
-      };
+      if (err) {e.log(err);};
       // redirect user to view of brands
       return res.redirect('/brands');
     })
