@@ -27,7 +27,7 @@ function index(req, res) {
   // query ALL ice creams
   IceCream.find({}, function (err, iceCreams) {
     // render view of flavors
-    res.render('flavors', {
+    res.render('flavors/flavors', {
       iceCreams,
       user: req.user
     });
@@ -46,7 +46,7 @@ function update(req, res) {
       // next, check if user has entered new brand as well
       if (req.body.addingNewBrand === 'true') {
         //if so, redirect user to New Brand page
-        res.render('newBrand', {
+        res.render('brands/newBrand', {
           iceCream,
           title: 'Add Brand Image',
           user: req.user

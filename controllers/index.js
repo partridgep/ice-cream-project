@@ -160,7 +160,7 @@ function saveIceCream(iceCream, addingNewFlavor, addingNewBrand, req, res) {
     // check if user has added new flavor
     if (addingNewFlavor) {
       // if so, redirect user to new flavor page
-      res.render('newFlavor', {
+      res.render('flavors/newFlavor', {
         iceCream,
         title: 'Add Flavor Image',
         user: req.user,
@@ -169,7 +169,7 @@ function saveIceCream(iceCream, addingNewFlavor, addingNewBrand, req, res) {
     } // check if user has added new brand
     else if (addingNewBrand) {
       //if so, redirect user to new brand pag
-      res.render('newBrand', {
+      res.render('brands/newBrand', {
         iceCream,
         title: 'Add Brand Image',
         user: req.user

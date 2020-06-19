@@ -1,4 +1,4 @@
-<%- include('./partials/header') %>
+<%- include('../partials/header') %>
 
 <main>
 
@@ -10,12 +10,12 @@
 <div id='ice-cream-flex' class="swiper-wrapper">
   <% brandsIceCreams.forEach(function(i) { %>
     <% firstBrand = i.brandName %>
-      <%- include('./partials/individual-ice-cream', { i: i}) %>
+      <%- include('../partials/individual-ice-cream', { i: i}) %>
   <% }); %>
 
   <% iceCreams.forEach(function(i) { %>
     <% if (i.brandName !== firstBrand) { %>  
-        <%- include('./partials/individual-ice-cream', { i: i}) %>
+        <%- include('../partials/individual-ice-cream', { i: i}) %>
     <% } %>
   <% }); %>
 </div>
@@ -25,4 +25,4 @@
 
 </main>
 
-<%- include('./partials/footer') %>
+<%- include('../partials/footer') %>

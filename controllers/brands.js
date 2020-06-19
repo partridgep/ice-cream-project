@@ -16,7 +16,7 @@ function show(req, res) {
   // query all ice creams of the same brand
   IceCream.find({ brandName: req.params.brandName }, function (err, iceCreams) {
     // render view for that flavor
-    res.render('brandsFlavors', {
+    res.render('brands/brandsFlavors', {
       iceCreams,
       user: req.user
     });
@@ -28,7 +28,7 @@ function index(req, res) {
   // query ALL ice creams
   IceCream.find({}, function (err, iceCreams) {
     // render view of brands
-    res.render('brands', {
+    res.render('brands/brands', {
       iceCreams,
       user: req.user
     });
@@ -55,7 +55,7 @@ function goToFlavors(req, res) {
     IceCream.find({ flavorName: req.params.flavorName }).populate("reviews.reviewedBy").exec( function (err, iceCreams) {
       IceCream.find({ brandName: req.params.brandName, flavorName: req.params.flavorName}).populate("reviews.reviewedBy").exec( function (err, brandsIceCreams) {
         // render view for that flavor
-        res.render('brandsIceCreams', {
+        res.render('brands/brandsIceCreams', {
           iceCreams,
           brandsIceCreams,
           user: req.user
