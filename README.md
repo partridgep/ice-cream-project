@@ -18,7 +18,7 @@ A CRUD web app that lets you pick and compare your ice cream based on flavor and
 
 ## ERD
 
-![ERD Diagram](https://i.imgur.com/maP4SPM.png)
+![ERD Diagram](https://i.imgur.com/ZlWB6mo.png)
 
 ## Wireframes & Completed Project Screenshots
 
@@ -65,7 +65,7 @@ The Ice Cream model contains the following properties:
 * Short description
 * Array of reviews
 
-That may seem like a good amount of properties for an ice cream to contain, but thankfully most of the time the user will not have to input all of these in themselves. The purpose of having separate names and images for the ice cream itself, its flavor, and its brand, is to allow for simple query searches and a more pleasing display of the information.
+That may seem like a good amount of properties for an ice cream to contain, but thankfully most of the time the user will not have to input all of these in themselves. The purpose of having separate names and images for the ice cream itself, its flavor, and its brand, is to allow for simple query searches and a more pleasing display of information.
 
 The reviews are a nested model inside the ice cream model, and contain the following properties:
 
@@ -102,7 +102,7 @@ All properties of all the ice creams are passed through as we render the flavors
 
 Therefore, if we want to create an input button to access one flavor, we can have it display its name and image (as we render the page, we keep an array of flavors and only add a new button if the flavor has not already been added to the array, ensuring every flavor is only listed once.)
 
-What if we only want to show the flavors that a particular brand has?
+What if we only want to show the flavors of a particular brand?
 
 We would call that same `.find()` function, except this time, we would pass that brand name as a parameter:
 
@@ -115,7 +115,7 @@ IceCream.find({ brandName: req.params.brandName }, function (err, iceCreams) {
   });
 ```
  
-The function is finding all the ice creams whose brand name is the one we want, and passes just those ice creams to the brand's flavors page.
+The function is finding all the ice creams with the desired brand name, and passes just those ice creams to the brand's flavors page.
 
 ### Displaying Individual Ice Creams
 
@@ -144,11 +144,11 @@ IceCream.find({ flavorName: req.params.flavorName })
 
 First we find ALL ice creams of the flavor (which gives us `iceCreams`, but then we query again to find ice creams of said flavor AND brand (giving us `brandsIceCreams`.) We can then render our brands' ice creams page, looping through `brandsIceCreams` first to create a view div for each, then through `iceCreams` to add all the remaining ones (ignoring the ones already added.)
 
-![image](https://i.imgur.com/SX9pzWv.png)
+![Flavor Page Comparison](https://i.imgur.com/SX9pzWv.png)
 
 ### Displaying User Ratings and Reviews
 
-Each ice cream's ratings are reviewed are embedded in its review schema. Therefore, it's a simple matter of iterating through each ice cream's reviews array and displaying the relevant information.
+Each ice cream's ratings reviews are embedded in its review schema. Therefore, it's a simple matter of iterating through each ice cream's reviews array and displaying the relevant information.
 
 
 ## CRUD: Creating
@@ -157,7 +157,7 @@ Each ice cream's ratings are reviewed are embedded in its review schema. Therefo
 
 Once a user is logged in, they have access to the 'Add New Ice Cream' form. They will be prompted to enter fields with the necessary information.
 
-In case they want to add another flavor or another brand of other existing ice creams, we render those other properties as input options in a dropdown menu:
+In case they want to add another flavor or brand of other existing ice creams, we render those other properties as input options in a dropdown menu:
 
 ![image](https://i.imgur.com/Rjs9bC6.png)
 
@@ -166,35 +166,35 @@ The last input option will be `Other`, which if selected, will trigger the form 
 To do this, we create a Constructor object in order to assign the properties we desire. For example, this is how we would assign the flavor name:
 
 ```
-  if (req.body.flavor === 'Other') {
-    iceCreamConstructor.flavor = req.body.newFlavor;
-    addingNewFlavor = true;
-  } else {
-    iceCreamConstructor.flavor = req.body.flavor;
-  };
+if (req.body.flavor === 'Other') {
+  iceCreamConstructor.flavor = req.body.newFlavor;
+  addingNewFlavor = true;
+} else {
+  iceCreamConstructor.flavor = req.body.flavor;
+};
 ```
 
 First, we check to see if the user has entered a new flavor. If so, we tell our constructor that the flavor will correspond to what the user has entered in the `newFlavor` input field. Otherwise, it will correspond to whatever option has been selected in the `flavor` dropdown menu.
 
 *But what about the flavor and brand images?*
 
-If the user has selected an existing flavor or brand, then the create function will find other ice creams with the same flavor and brand, grab their images, and assign them to the new ice cream:
+If the user has selected an existing flavor or brand, then the create function will find other ice creams with the same flavor and/or brand, grab their images, and assign them to the new ice cream:
 
 ```
-  if (!addingNewBrand) 
-    IceCream.findOne({ brandName: iceCreamConstructor.brand }, function (err, sameBrand) {
-      iceCreamConstructor.brandImage = sameBrand.brandImage;
-      iceCream = createHelper(req.body, iceCreamConstructor);
-      saveIceCream(iceCream, addingNewFlavor, addingNewBrand, req, res);
-    });
-  };
+if (!addingNewBrand) 
+  IceCream.findOne({ brandName: iceCreamConstructor.brand }, function (err, sameBrand) {
+    iceCreamConstructor.brandImage = sameBrand.brandImage;
+    iceCream = createHelper(req.body, iceCreamConstructor);
+    saveIceCream(iceCream, addingNewFlavor, addingNewBrand, req, res);
+  });
+};
 ```
 
-If the user has selected a *new* flavor or brand, their will be redirected to another input page to enter a link for those images. By that point, the ice cream will have been created, so that will constitute an *update*.
+If the user has selected a *new* flavor or brand, their will be redirected to another input page to enter a link for those images. By that point, the ice cream will have been created, so that will constitute an [*update*](https://github.com/partridgep/ice-cream-project#adding-a-flavorbrand-image-directly-after-ice-cream-creation-as-an-update).
 
 ### Creating a User Rating
 
-If the user is logged in, they are able to view an form that lets them input a rating from 1 to 5, represented as a five-star system. Each star acts as a submit button, triggering a create function. This rating becomes added to that ice cream's review schema, and the user's `RatedIceCreams` array has that ice cream added to it as a reference.
+If the user is logged in, they are able to view a form that lets them input a rating from 1 to 5, represented as a five-star system. Each star acts as a submit button, triggering a create function. This rating becomes added to that ice cream's review schema, and the user's `RatedIceCreams` array has that ice cream added to it as a reference.
 
 ### Creating a User Review
 
@@ -219,8 +219,8 @@ The user is able to update any ice cream property after clicking on the "Edit" f
 If the user updates either the flavor or brand image, then it gets updated for ALL ice creams of the same brand of flavor:
 
 ```
-    if (iceCream.flavorImage !== req.body.flavorImage) {
-      IceCream.find({ 
+if (iceCream.flavorImage !== req.body.flavorImage) {
+    IceCream.find({ 
       flavorImage: iceCream.flavorImage, 
       flavorName: iceCream.flavorName }, 
       function (err, sameFlavorImage) {
@@ -229,7 +229,7 @@ If the user updates either the flavor or brand image, then it gets updated for A
           i.save(function (err) { console.log(err) });
         };
       });
-    };
+};
 ```
 
 ### Updating a User Rating
@@ -305,5 +305,8 @@ Using the [Swiper framework](https://swiperjs.com/), each ice cream div becomes 
 
 # IceBox Features
 
+* Ensure cross-browser optimization (Swiper on Safari iPhone not functioning perfectly as of yet)
+* Add "Back to Basics" boolean for ice creams to only show "Basic" ice creams (i.e. basic chocolate and not chocolate fudge brownie) when selected
+* Ensure user is redirected to ice cream they clicked on first from their user page
 
 
