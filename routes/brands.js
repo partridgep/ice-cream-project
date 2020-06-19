@@ -4,6 +4,9 @@ const router = express.Router();
 const brandsCtrl = require('../controllers/brands');
 
 // GET /brands/:brandName
+router.get('/:brandName/:flavorName', brandsCtrl.goToFlavors);
+
+// GET /brands/:brandName
 router.get('/:brandName', brandsCtrl.show);
 
 // GET /brands/

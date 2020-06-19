@@ -486,7 +486,16 @@ footer {
     margin-left: 15px;
 }
 
+.swiper-container {
+    width: initial;
+    height: initial;
+  }
+
 @media (max-width: 600px) {
+
+    main {
+        overflow-x: hidden;
+    }
 
     nav {
         font-size: 13px;
@@ -530,11 +539,7 @@ footer {
         margin: 7px;
     }
 
-    #individual-ice-cream {
-        width: 350px;
-        min-height: 600px;
-    }
-
+    
     .ice-cream {
         height: 35vh;
     }
@@ -542,33 +547,33 @@ footer {
     .ice-cream>img {
         height: 35vh;
     }
-
+    
     #rating-form {
         margin-left: 50px;
     }
-
+    
     #rating-form button {
         background: none;
         border: none;
         outline: none;
     }
-
+    
     textarea {
         width: 80vw;
     }
-
+    
     .my-flavors {
         font-size: 45px;
     }
-
+    
     #review-flex {
         width: 97vw;
     }
-
+    
     #ice-cream-link > #reviewer-name {
         font-size: 15px;
     }
-
+    
     #new-form {
         display: grid;
         grid-gap: 7px;
@@ -595,7 +600,20 @@ footer {
     #new-form label {
         text-align: right;
     }
+    
+    #ice-creams-page-title {
+        display: none;
+    }
+    
+    .swiper-container {
+        width: 100%;
+        height: 100%;
+      }
 
+    .swiper-pagination {
+        position: fixed !important;
+        bottom: 25px !important;
+    }
 }
 
 @media (max-width: 370px) {

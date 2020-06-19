@@ -26,14 +26,23 @@ const deleteDivPart3 =`/rating?_method=DELETE" method="POST">
                         <button class="cancel-del">Cancel</button> 
                 </div>`;
 
+// window width constant
+const windowWidth = window.matchMedia("(max-width: 600px)");
+
+
 /*----- app's state (variables) -----*/
 let removedReview, $iceCreamBox;
+
+// keep track of swiper instances to destroy later
+let swiper;
 
 /*----- cached element references -----*/
 const $selector = $('#ice-cream-flex');
 
 /*----- event listeners -----*/
 $selector.click(handleClick);
+windowWidth.addListener(checkWindowWidth) // Attach listener function on state changes
+
 
 /*----- functions -----*/
 
@@ -91,3 +100,31 @@ function deleteReview(e) {
     //we interject the ice cream ID into those forms
     $reviewBoxForDel.append(deleteDivPart1+iceCreamID+deleteDivPart2+iceCreamID+deleteDivPart3);
 };
+
+//window width changes and media query is triggered
+function checkWindowWidth(windowWidth) {
+    if (windowWidth.matches) { // If media query matches
+        //initialize swiper
+        swiper = new Swiper('.swiper-container', {
+            cssMode: true,
+            navigation: {
+              nextEl: '.swiper-button-next',
+              prevEl: '.swiper-button-prev',
+            },
+            pagination: {
+              el: '.swiper-pagination'
+            },
+            mousewheel: true,
+            keyboard: true,
+          })
+        } else if ($selector.is('#ice-cream-flex')){
+            //destroy swiper instance when window gets larger
+            if ( swiper !== undefined ) swiper.destroy( true, true );
+        }
+};
+
+//check window width on load
+checkWindowWidth(windowWidth);
+
+
+

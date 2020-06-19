@@ -5,7 +5,8 @@ const IceCream = require('../models/icecream');
 module.exports = {
   index,
   show,
-  update
+  update,
+  goToFlavors
 };
 
 //___________RESTful Functions (get called in Router)________________//
@@ -48,6 +49,20 @@ function update(req, res) {
     })
   });
 };
+
+function goToFlavors(req, res) {
+    // query all ice creams of the same flavor
+    IceCream.find({ flavorName: req.params.flavorName }).populate("reviews.reviewedBy").exec( function (err, iceCreams) {
+      IceCream.find({ brandName: req.params.brandName, flavorName: req.params.flavorName}).populate("reviews.reviewedBy").exec( function (err, brandsIceCreams) {
+        // render view for that flavor
+        res.render('brandsIceCreams', {
+          iceCreams,
+          brandsIceCreams,
+          user: req.user
+        });
+      });
+    });
+}
 
 
 

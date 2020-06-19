@@ -2,142 +2,17 @@
 
 <main>
 
-<h1>Ice Cream Comparison</h1>
+  <h1 id='ice-creams-page-title'><%= iceCreams[0].flavorName %> Ice Creams</h1>
 
-<div id='ice-cream-flex'>
+<!-- Slider main container -->
+<div class="swiper-container">
+<div id='ice-cream-flex' class="swiper-wrapper">
   <% iceCreams.forEach(function(i) { %>
-  <div id='individual-ice-cream'>
-    <!-- set rated boolean to false -->
-    <% let rated = false %>
-    <!-- set user-specific reviewed boolean to false -->
-    <% let reviewed = false %>
-    <!-- set reviewed by anyone boolean to false -->
-    <% let anyReviewed = false %>
-    <% if (user) { %>
-      <p id='edit'><a href="/iceCreams/<%= i._id %>">Edit</a></p> 
-    <% } %>
-    <a href="<%= i.url %>" target="_blank">
-      <div class='ice-cream'>
-        <img src='<%= i.image %>'>
-      </div>
-    </a>
-    <p id='name'><%= i.name %></p>
-    <p id='description'><span>Description:</span> <%= i.description %></p>
-    <!--check if any ratings exist -->
-    <% if (i.reviews.length) { %>
-    <!--First let's set up a total variable -->
-    <% let total = 0 %>
-    <% i.reviews.forEach(function(r) { %>
-    <!-- We'll aggregate the total ratings -->
-    <% total += r.rating %>
-    <% }) %>
-    <% let avgRating = (total / i.reviews.length).toFixed(1) %>
-    <div id='avg-rating'>
-      <!-- create five stars in descending order -->
-      <% for(j=5; j>0; j--) { %>
-        <!-- only color them yellow if their value is less than or equal to user's rating -->
-        <% if (j > avgRating) { %>
-          <p value="<%= j %>"><i class="material-icons left">star</i></p>
-        <% } else { %>
-        <p value="<%= j %>"><i class="material-icons left filled">star</i></p>
-      <% }} %>
-      <p id='rating'><span>Average Rating:</span>
-    </div>
-    <% } else { %>
-    <p id='rating'><span>Average Rating:</span> No Ratings Yet</p>
-    <% } %>
-
-    <!-- If logged in, add ability to add star rating -->
-    <% if (user) { %>
-      <!-- display user's rating if it already exists -->
-      <!-- loop through ice cream's reviews -->
-      <% for (r of i.reviews) { %>
-        <!-- check is user has rated this ice cream -->
-        <% if (r.reviewedBy._id == user._id.toString()) { %>
-          <!-- display rating system with user rating already showing -->
-          <p id='user-rating'><span>My Rating:</span>
-          <!-- this is PUT form as it will update the user's existing rating -->
-          <form id="rating-form" action="/reviews/<%= i._id %>/rating?_method=PUT" method="POST">
-            <input type="hidden" name="reviewedBy" value="<%= user._id %>">
-            <!-- create five stars in descending order -->
-            <% for(j=5; j>0; j--) { %>
-              <!-- only color them yellow if their value is less than or equal to user's rating -->
-              <% if (j > r.rating) { %>
-                <button type="submit" name="rating" value="<%= j %>"><i class="material-icons left">star</i></button>
-              <% } else { %>
-              <button type="submit" name="rating" value="<%= j %>"><i class="material-icons left filled">star</i></button>
-            <% }} %>
-          </form>
-          <!-- set reviewed boolean to true and break out of function (no need to keep looping through reviews) -->
-          <% rated = true; %>
-          <% break %>
-        <% }; %>
-      <% }; %>
-
-      <!-- if user has not reviewed this ice cream -->
-      <% if (rated === false) { %>
-        <!-- display rating system -->
-        <p id='user-rating'><span>My Rating:</span>
-        <!-- this is POST form as it will CREATE a user rating-->
-        <form id="rating-form" action="/reviews/<%= i._id %>/rating" method="POST">
-          <input type="hidden" name="reviewedBy" value="<%= user._id %>">
-          <!-- create five stars in descending order -->
-          <% for(j=5; j>0; j--) { %>
-              <button type="submit" name="rating" value="<%= j %>"><i class="material-icons left">star</i></button>
-            <% }; %>
-        </form>
-      <% }; %>
-    <% }; %>
-
-    <p id='review'><span>Reviews:</span>
-      <% if (i.reviews.length) { %>
-      <% i.reviews.forEach(function(r) { %>
-        <% if (r.content) { %>
-        </p>
-          <% anyReviewed = true %>
-          <div id="selector-flex">
-            <div id="review-box" value="<%= i._id %>">
-              <% if (user && r.reviewedBy.name === user.name) { %>
-                <p id='edit-review'><a class="edit-link" href="">Edit</a> - <a href="">X</a></p>
-                <% reviewed = true %>
-              <% } %>
-              <img src="<%= r.reviewedBy.avatarURL%>">
-              <p id="reviewer-name"><%= r.reviewedBy.name%></p>
-              <div id='reviewer-rating'>
-                <% for(j=5; j>0; j--) { %>
-                  <% if (j > r.rating) { %>
-                    <p value="<%= j %>"><i class="material-icons left">star</i></p>
-                  <% } else { %>
-                  <p value="<%= j %>"><i class="material-icons left filled">star</i></p>
-                <% }} %>
-                <p id='rating'>
-              </div>
-              <p id="content"><%= r.content %></p>
-              <% if (user && r.reviewedBy.name === user.name) reviewed = true %>
-            </div>
-          </div>
-        <% } %>
-      <% }) %>
-
-      <% }  if (!anyReviewed) { %>
-      No Reviews Yet</p>
-      <% } %>
-    
-    <% if (user) { %>
-      <% if (!reviewed) { %>
-      <form action="/reviews/<%= i._id %>" method="POST">
-        <textarea name="content" rows="3" cols="48" placeholder="Add rating before writing review"></textarea>
-        <input type="hidden" name="reviewedBy" value="<%= user._id %>">
-        <input type="submit" id="addReviewBtn" value="Add Review">
-      </form>
-      <% } %>
-    <% } else { %>
-      <form action="/auth/google" method="GET">
-        <button type="submit" id="addReviewBtn">Login to Add Review</button>
-      </form>
-    <% } %>
-  </div>
+    <%- include('./partials/individual-ice-cream', { i: i}) %>
   <% }); %>
+</div>
+<!-- Add Pagination -->
+<div class="swiper-pagination"></div>
 </div>
 
 </main>

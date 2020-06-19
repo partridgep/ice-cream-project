@@ -25,13 +25,6 @@ require('./config/passport');
 // Configure the app with app.set()
 app.set('view engine', 'ejs');
 
-// Mount middleware with app.use()
-app.use(function(req, res, next) {
-    //attach property to request object
-    console.log(`Referer: ${req.get('referer')}`);
-    req.referer = req.get('referer');
-    next();
-})
 app.use(morgan('dev'));
 app.use(express.static('public'));
 app.use(methodOverride('_method'));
@@ -43,6 +36,20 @@ app.use(session({
     saveUninitialized: true
 }));
 app.use(passport.initialize());
+// Mount middleware with app.use()
+/*
+app.use(function(req, res, next) {
+    //console.log(req.session)
+    //console.log(req.originalUrl)
+    if (req.originalUrl !== '/auth/google' && req.originalUrl !== '/login' && !req.originalUrl.includes('/oauth2callback')) {
+        req.session.redirectTo = req.originalUrl;
+    }
+    else {
+        req.session.redirectTo = '/';
+    };
+    next();
+})
+*/
 app.use(passport.session());
 
 // Mount routes with app.use()

@@ -22,18 +22,16 @@ router.get('/auth/google', passport.authenticate(
 router.get('/oauth2callback', passport.authenticate(
     'google',
     {
-      successReturnToOrRedirect: '/login',
+      successReturnToOrRedirect: '/',
       failureRedirect : '/'
     }
   ));
 
+/*
 router.get('/login', function(req, res) {
-  //if (req.referer === 'http://localhost:3000/' || req.referer === 'https://seir-ice-creams.herokuapp.com/') {
-    //res.redirect('/');
-  //} else {
-    res.redirect(req.referer);
-  //};
+  res.redirect(req.session.redirectTo)
 }) 
+*/
 
 // OAuth logout route
 router.get('/logout', function(req, res){

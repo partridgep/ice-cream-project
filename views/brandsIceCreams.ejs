@@ -1,0 +1,28 @@
+<%- include('./partials/header') %>
+
+<main>
+
+<h1 id='ice-creams-page-title'><%= brandsIceCreams[0].flavorName %> Ice Creams</h1>
+
+<% let firstBrand; %>
+
+<div class="swiper-container">
+<div id='ice-cream-flex' class="swiper-wrapper">
+  <% brandsIceCreams.forEach(function(i) { %>
+    <% firstBrand = i.brandName %>
+      <%- include('./partials/individual-ice-cream', { i: i}) %>
+  <% }); %>
+
+  <% iceCreams.forEach(function(i) { %>
+    <% if (i.brandName !== firstBrand) { %>  
+        <%- include('./partials/individual-ice-cream', { i: i}) %>
+    <% } %>
+  <% }); %>
+</div>
+<!-- Add Pagination -->
+<div class="swiper-pagination"></div>
+</div>
+
+</main>
+
+<%- include('./partials/footer') %>
