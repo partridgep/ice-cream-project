@@ -13,7 +13,7 @@ A CRUD web app that lets you pick and compare your ice cream based on flavor and
 * MongoDB
 * Mongoose
 * Express
-* Passport
+* PassportJS
 * Google Fonts
 * Materialize Icons
 * Swiper Framework
