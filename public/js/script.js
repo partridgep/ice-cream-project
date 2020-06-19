@@ -6,6 +6,7 @@ const updateFormPart2 = `/update?_method=PUT" method="POST">
                     <textarea rows="3" cols="48" name="content">`;
 //in between here we will add the review content
 const updateFormPart3 = `</textarea>
+                        <br>
                         <input type="hidden" name="reviewedBy" value="<%= user._id %>">
                         <button class="cancel-update">Cancel</button>
                         <input type="submit" id="addReviewBtn" value="Update Review">
