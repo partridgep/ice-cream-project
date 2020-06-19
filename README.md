@@ -293,11 +293,15 @@ User.findById(req.user, function(err, reviewer) {
 
 ### Media Queries
 
-Media queries are utilized to make the app optimized for viewing and browsing on mobile.
+Media queries make the app optimized for viewing and browsing on mobile.
 
-
+![Mobile View](https://i.imgur.com/r68VX63.png)
 
 ### Swiper Framework
+
+Using the [Swiper framework](https://swiperjs.com/), each ice cream div becomes its own little card, allowing the user to swipe between each, kind of like a Tinder for ice cream.
+
+![Swipe Demonstration](https://i.imgur.com/xF1yRYc.png)
 
 # IceBox Features
 
