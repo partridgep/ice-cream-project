@@ -438,11 +438,13 @@ textarea {
 #delete-review > form {
     margin: 0;
     padding: 0;
+    opacity: 100%;
 }
 
 #delete-review > button {
     height: 20px;
     text-align: center;
+    opacity: 100%;
 }
 
 #just-review, #both-rs {
