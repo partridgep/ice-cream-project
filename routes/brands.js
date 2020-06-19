@@ -3,7 +3,7 @@ const passport = require('passport');
 const router = express.Router();
 const brandsCtrl = require('../controllers/brands');
 
-// GET /brands/:brandName
+// GET /brands/:brandName/:flavorName
 router.get('/:brandName/:flavorName', brandsCtrl.goToFlavors);
 
 // GET /brands/:brandName

@@ -12,7 +12,7 @@
 <% for (iceCream of user.ratedIceCreams) { %>
     <% for (r of iceCream.reviews) { %>
         <% if (r.reviewedBy._id.toString() === user._id.toString() && r.rating === 5) { %>
-            <form id="flavor-form" action="/flavors/<%= iceCream.flavorName %>" method="GET">
+            <form id="flavor-form" action="/brands/<%= iceCream.brandName %>/<%= iceCream.flavorName %>" method="GET">
                 <button class='my-flavors' type='submit' value='<%= iceCream.flavorName %>' name='flavorName' style="background-image: url('<%= iceCream.image %>')"><%= iceCream.name %></button>
               </form>
 
@@ -28,7 +28,7 @@
             <div id="review-flex">
                 <div id="review-box">
                   <img src="<%= iceCream.image %>">
-                  <a id="ice-cream-link" href="/flavors/<%= iceCream.flavorName %>"><p id="reviewer-name"><%= iceCream.name %></p></a>
+                  <a id="ice-cream-link" href="/brands/<%= iceCream.brandName %>/<%= iceCream.flavorName %>"><p id="reviewer-name"><%= iceCream.name %></p></a>
                   <div id='reviewer-rating'>
                     <% for(j=5; j>0; j--) { %>
                       <% if (j > r.rating) { %>
