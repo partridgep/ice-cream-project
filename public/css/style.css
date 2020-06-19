@@ -539,7 +539,6 @@ footer {
         margin: 7px;
     }
 
-    
     .ice-cream {
         height: 35vh;
     }
@@ -608,6 +607,7 @@ footer {
     .swiper-container {
         width: 100%;
         height: 100%;
+        overflow-y: hidden;
       }
 
     .swiper-pagination {

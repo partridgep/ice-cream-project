@@ -13,25 +13,25 @@ A CRUD web app that lets you pick and compare your ice cream based on flavor and
 * MongoDB
 * Mongoose
 * Google Fonts
-* Google Icons
+* Materialize Icons
 * Swiper Framework
 
 ## ERD
 
-![image](https://i.imgur.com/maP4SPM.png)
+![ERD Diagram](https://i.imgur.com/maP4SPM.png)
 
 ## Wireframes & Completed Project Screenshots
 
-![image](https://i.imgur.com/yp8AVDS.png)
+![Home Page](https://i.imgur.com/IjGE72q.png)
 
 
-![image](https://i.imgur.com/QDf4o3w.png)
+![Flavor Selection Page](https://i.imgur.com/VziTVvO.png)
 
 
-![image](https://i.imgur.com/LEh0BgS.png)
+![Brand Selection Page](https://i.imgur.com/X2dLdXY.png)
 
 
-![image](https://i.imgur.com/eoJnaNo.png)
+![Ice Cream Comparison Page](https://i.imgur.com/cpZQZkd.png)
 
 
 # Functioning
@@ -249,14 +249,57 @@ The user can click on the "X" button above their review and choose to delete eit
 
 ### Deleting a user review
 
-The user can click on the "Delete Review" button, removing just their review, but their rating will remain, and so it will stay within that ice cream's reviews array.
+The user can click on the "Delete Review" button, removing just their review, but their rating will remain, and so the review reference will stay within that ice cream's reviews array:
+
+```
+IceCream.findById(req.params.id, function(err, iceCream) {
+    for (review of iceCream.reviews) {
+       if (review.reviewedBy.toString() === req.user.id.toString()) {
+            review.content = "";
+            break;
+   		};
+	};
+```
 
 ### Deleting a user review & rating
 
-If the user clicks on "Delete Review + Rating", they remove their review from that ice cream's reviews array.
+If the user clicks on "Delete Review + Rating", their review is removed from that ice cream's reviews array:
+
+```
+IceCream.findById(req.params.id, function(err, iceCream) {
+     for (i=0; i<iceCream.reviews.length; i++) {
+        if (iceCream.reviews[i].reviewedBy.toString() === req.user.id.toString()) {
+            iceCream.reviews.splice(i, 1);
+            break;
+      	  };
+ 	  };
+```
+
+
+Additionally, the ice cream reference is removed from the user's array of rated ice creams:
+
+```
+User.findById(req.user, function(err, reviewer) {
+    for (i=0; i<reviewer.ratedIceCreams.length; i++) {
+         if (reviewer.ratedIceCreams[i].toString() === req.params.id.toString()) {
+             reviewer.ratedIceCreams.splice(i, 1);
+       };
+    };
+    reviewer.save(function(err) {console.log(err)});
+});
+```
+
+# Mobile Optimization
+
+### Media Queries
+
+Media queries are utilized to make the app optimized for viewing and browsing on mobile.
 
 
 
+### Swiper Framework
+
+# IceBox Features
 
 
 
