@@ -305,8 +305,9 @@ Using the [Swiper framework](https://swiperjs.com/), each ice cream div becomes 
 
 # IceBox Features
 
-* Ensure cross-browser optimization (Swiper on Safari iPhone not functioning perfectly as of yet)
+* Ensure cross-browser optimization 
 * Add "Back to Basics" boolean for ice creams to only show "Basic" ice creams (i.e. basic chocolate and not chocolate fudge brownie) when selected
 * Ensure user is redirected to ice cream they clicked on first from their user page
+* Redirect user to previous page after logging in
 
 
