@@ -1,9 +1,9 @@
 # Ice Cream Selector
-A web app that lets you pick and compare your ice cream based on either flavor or brand, using a cloud-deployed database of ice creams, with full CRUD capabilities.
+A CRUD web app that lets you pick and compare your ice cream based on flavor and/or brand, using a cloud-deployed database of ice creams.
 
 
 ## Getting Started
-[Click Here](https://seir-ice-creams.herokuapp.com/) to get started (please allow 
+[Click Here](https://seir-ice-creams.herokuapp.com/) to get started (please allow 20-30 seconds for Heroku to warm up.)
 
 ## Technologies Used
 * HTML
@@ -14,46 +14,24 @@ A web app that lets you pick and compare your ice cream based on either flavor o
 * Mongoose
 * Google Fonts
 * Google Icons
+* Swiper Framework
 
 ## ERD
 
 ![image](https://i.imgur.com/maP4SPM.png)
 
-## Screenshots
+## Wireframes & Completed Project Screenshots
 
-### Wireframe
-*Home Page:*
+![image](https://i.imgur.com/yp8AVDS.png)
 
-![image](https://i.imgur.com/Z6udr2B.png)
 
-*Flavor Selection Page:*
+![image](https://i.imgur.com/QDf4o3w.png)
 
-![image](https://i.imgur.com/6J2DAot.png)
 
-*Brand Selection Page:*
+![image](https://i.imgur.com/LEh0BgS.png)
 
-![image](https://i.imgur.com/B4K8QRY.png)
 
-*Ice Cream Comparison Page:*
-
-![image](https://i.imgur.com/QF4jqkU.png)
-
-### Completed Project
-*Home Page:*
-
-![image](https://i.imgur.com/dVa7Nm2.jpg)
-
-*Flavor Selection Page:*
-
-![image](https://i.imgur.com/jgqBtp8.png)
-
-*Brand Selection Page:*
-
-![image](https://i.imgur.com/3Haal9T.png)
-
-*Ice Cream Comparison Page:*
-
-![image](https://i.imgur.com/1xFY7f1.png)
+![image](https://i.imgur.com/eoJnaNo.png)
 
 
 # Functioning
@@ -87,7 +65,7 @@ The Ice Cream model contains the following properties:
 * Short description
 * Array of reviews
 
-That may seem like a good amount of properties for an ice cream to contain, but thankfully most of the time the user will not have to fill all of these in themselves. The purpose of having separate names and images for the ice cream itself, its flavor, and its brand, is to allow for simple query searches and a more pleasing display of the app.
+That may seem like a good amount of properties for an ice cream to contain, but thankfully most of the time the user will not have to input all of these in themselves. The purpose of having separate names and images for the ice cream itself, its flavor, and its brand, is to allow for simple query searches and a more pleasing display of the information.
 
 The reviews are a nested model inside the ice cream model, and contain the following properties:
 
@@ -137,9 +115,148 @@ IceCream.find({ brandName: req.params.brandName }, function (err, iceCreams) {
   });
 ```
  
-The function is finding all the ice creams whose brand name is the one we want, and pass just those ice creams to the brand's flavors page.
+The function is finding all the ice creams whose brand name is the one we want, and passes just those ice creams to the brand's flavors page.
 
 ### Displaying Individual Ice Creams
 
+Once the user has chosen a flavor, they are redirected to a view of all ice creams featuring that flavor.
+
+If they have not chosen the flavor through a specific brand, the ice creams will simply appear in the order that they exist in the database. We iterate through the ice creams we queried in the controller and create a view div for each.
+
+If the user accessed the flavor by selecting a brand first (i.e. Ben & Jerry's > Vanilla), we want the first ice cream(s) they see to be of that brand.
+
+Our function in the controller would look something like this:
+
+```
+IceCream.find({ flavorName: req.params.flavorName })
+.populate("reviews.reviewedBy")
+.exec( function (err, iceCreams) {
+      IceCream.find({ brandName: req.params.brandName, flavorName: req.params.flavorName})
+      .populate("reviews.reviewedBy").exec( function (err, brandsIceCreams) {
+        res.render('brandsIceCreams', {
+          iceCreams,
+          brandsIceCreams,
+          user: req.user
+        });
+    });
+});
+```
+
+First we find ALL ice creams of the flavor (which gives us `iceCreams`, but then we query again to find ice creams of said flavor AND brand (giving us `brandsIceCreams`.) We can then render our brands' ice creams page, looping through `brandsIceCreams` first to create a view div for each, then through `iceCreams` to add all the remaining ones (ignoring the ones already added.)
+
+![image](https://i.imgur.com/SX9pzWv.png)
+
+### Displaying User Ratings and Reviews
+
+Each ice cream's ratings are reviewed are embedded in its review schema. Therefore, it's a simple matter of iterating through each ice cream's reviews array and displaying the relevant information.
+
 
 ## CRUD: Creating
+
+### Adding a new ice cream to the database
+
+Once a user is logged in, they have access to the 'Add New Ice Cream' form. They will be prompted to enter fields with the necessary information.
+
+In case they want to add another flavor or another brand of other existing ice creams, we render those other properties as input options in a dropdown menu:
+
+![image](https://i.imgur.com/Rjs9bC6.png)
+
+The last input option will be `Other`, which if selected, will trigger the form to register the user's text input as the name instead.
+
+To do this, we create a Constructor object in order to assign the properties we desire. For example, this is how we would assign the flavor name:
+
+```
+  if (req.body.flavor === 'Other') {
+    iceCreamConstructor.flavor = req.body.newFlavor;
+    addingNewFlavor = true;
+  } else {
+    iceCreamConstructor.flavor = req.body.flavor;
+  };
+```
+
+First, we check to see if the user has entered a new flavor. If so, we tell our constructor that the flavor will correspond to what the user has entered in the `newFlavor` input field. Otherwise, it will correspond to whatever option has been selected in the `flavor` dropdown menu.
+
+*But what about the flavor and brand images?*
+
+If the user has selected an existing flavor or brand, then the create function will find other ice creams with the same flavor and brand, grab their images, and assign them to the new ice cream:
+
+```
+  if (!addingNewBrand) 
+    IceCream.findOne({ brandName: iceCreamConstructor.brand }, function (err, sameBrand) {
+      iceCreamConstructor.brandImage = sameBrand.brandImage;
+      iceCream = createHelper(req.body, iceCreamConstructor);
+      saveIceCream(iceCream, addingNewFlavor, addingNewBrand, req, res);
+    });
+  };
+```
+
+If the user has selected a *new* flavor or brand, their will be redirected to another input page to enter a link for those images. By that point, the ice cream will have been created, so that will constitute an *update*.
+
+### Creating a User Rating
+
+If the user is logged in, they are able to view an form that lets them input a rating from 1 to 5, represented as a five-star system. Each star acts as a submit button, triggering a create function. This rating becomes added to that ice cream's review schema, and the user's `RatedIceCreams` array has that ice cream added to it as a reference.
+
+### Creating a User Review
+
+If the user is logged in, they are able to view an input form that lets them input a text review. Upon submission, that review is linked to their user rating.
+
+## CRUD: Updating
+
+### Adding a flavor/brand image directly after ice cream creation (as an update)
+
+If entering a new flavor and/or brand, the user is redirect to a new input field:
+
+![image](https://i.imgur.com/fQIKGa9.png)
+
+Upon submission, this new property will be added to the ice cream that was just created.
+
+### Updating any ice cream property
+
+The user is able to update any ice cream property after clicking on the "Edit" field. They are redirected to a form, with all fields pre-filled with the ice cream's values. Upon submission, all fields will be updated (though if nothing has changed, it will all be the same.)
+
+### Updating a flavor/brand image on the "Edit" page
+
+If the user updates either the flavor or brand image, then it gets updated for ALL ice creams of the same brand of flavor:
+
+```
+    if (iceCream.flavorImage !== req.body.flavorImage) {
+      IceCream.find({ 
+      flavorImage: iceCream.flavorImage, 
+      flavorName: iceCream.flavorName }, 
+      function (err, sameFlavorImage) {
+        for (i of sameFlavorImage) {
+          i.flavorImage = req.body.flavorImage;
+          i.save(function (err) { console.log(err) });
+        };
+      });
+    };
+```
+
+### Updating a User Rating
+
+The user can re-submit a rating on the five-star input field, triggering an update to their rating.
+
+### Updating a User Review
+
+The user can click on the "Edit" button above their review, rendering an input field pre-filled with their review content. Upon submission, the new text is updated to their review.
+
+## CRUD: Deleting
+
+The user can click on the "X" button above their review and choose to delete either their review, or their rating *and* their review:
+
+![](https://i.imgur.com/PU5uSJE.png)
+
+
+### Deleting a user review
+
+The user can click on the "Delete Review" button, removing just their review, but their rating will remain, and so it will stay within that ice cream's reviews array.
+
+### Deleting a user review & rating
+
+If the user clicks on "Delete Review + Rating", they remove their review from that ice cream's reviews array.
+
+
+
+
+
+
