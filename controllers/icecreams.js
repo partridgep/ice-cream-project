@@ -57,6 +57,7 @@ function update(req, res) {
     //now all other fields should be updated
     //we don't need to check if the user has modified them or not
     //if they have not, they will default to their same value
+    iceCream.name = req.body.name;
     iceCream.description = req.body.description;
     iceCream.image = req.body.image;
     iceCream.url = req.body.url;
@@ -69,7 +70,8 @@ function update(req, res) {
     iceCream.save(function (err) {
       if (err) {console.log(err)};
       //redirect to page of ice creams of same flavor
-      IceCream.find({ flavorName: iceCream.flavorName }, function (err, iceCreams) {
+      IceCream.find({ flavorName: iceCream.flavorName }).populate("reviews.reviewedBy").exec( function (err, iceCreams) {
+        // render view for that flavor
         res.render('icecreams', {
           iceCreams,
           user: req.user
